@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://rxseemrjxln4"]
+
+[ext_resource type="Script" uid="uid://cllqyliqalvv0" path="res://Scripts/long_note.gd" id="1_8q8q6"]
+[ext_resource type="Texture2D" uid="uid://bkvpb1u4jc5jn" path="res://Assets/Sprites/Notes/BodyNote.png" id="1_g2etu"]
+[ext_resource type="Texture2D" uid="uid://cxpm3rhx7fbbp" path="res://Assets/Sprites/Notes/HeadNote.png" id="2_jngid"]
+[ext_resource type="Texture2D" uid="uid://eqfv1j6fskn0" path="res://Assets/Sprites/Notes/BottomNote.png" id="3_8q8q6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jngid"]
+size = Vector2(67, 119)
+
+[node name="LongNote" type="Area2D" unique_id=356156028 groups=["notes"]]
+script = ExtResource("1_8q8q6")
+
+[node name="BottomNote" type="Sprite2D" parent="." unique_id=801114661]
+position = Vector2(49.5, 25)
+scale = Vector2(1.1166667, 1)
+texture = ExtResource("2_jngid")
+
+[node name="BodyNote" type="NinePatchRect" parent="." unique_id=1556713014]
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 83.0
+offset_bottom = 100.0
+texture = ExtResource("1_g2etu")
+
+[node name="HeadNote" type="Sprite2D" parent="." unique_id=1669203921]
+position = Vector2(49.5, 114)
+scale = Vector2(1.1166667, 1)
+texture = ExtResource("3_8q8q6")
+
+[node name="CollisionLongNote" type="CollisionShape2D" parent="." unique_id=570584308]
+position = Vector2(49.5, 69.5)
+shape = SubResource("RectangleShape2D_jngid")
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="." to="." method="_on_area_shape_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
