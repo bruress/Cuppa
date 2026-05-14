@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://joc05kyhggsy"]
 
-[ext_resource type="Script" uid="uid://c0mtbvnjnjrjf" path="res://RhythmGame/Scripts/idle_button_coffe.gd" id="1_tyvsn"]
+[ext_resource type="Script" uid="uid://c0mtbvnjnjrjf" path="res://RhythmGame/Scripts/Controllers/judgment_lane.gd" id="1_tyvsn"]
 [ext_resource type="Texture2D" uid="uid://clh55g40rixqf" path="res://RhythmGame/Assets/Sprites/Judgment/Judgment.png" id="3_i3awq"]
 [ext_resource type="Texture2D" uid="uid://c7l3cnx8ek1g6" path="res://RhythmGame/Assets/VFX/Effects/JudgmentEFfect.png" id="3_uvfgb"]
 
@@ -15,7 +15,7 @@ resource_name = "BloodyBite"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AreaJudgment1/EffectJudgment1:modulate")
+tracks/0/path = NodePath("JudgeArea1/EffectJudgment1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -31,7 +31,7 @@ length = 0.0333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AreaJudgment1/EffectJudgment1:modulate")
+tracks/0/path = NodePath("JudgeArea1/EffectJudgment1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,7 +48,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AreaJudgment1/EffectJudgment1:modulate")
+tracks/0/path = NodePath("JudgeArea1/EffectJudgment1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -69,7 +69,7 @@ resource_name = "RESET"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AreaJudgment1/EffectJudgment1:modulate")
+tracks/0/path = NodePath("JudgeArea1/EffectJudgment1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -85,7 +85,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AreaJudgment1/EffectJudgment1:modulate")
+tracks/0/path = NodePath("JudgeArea1/EffectJudgment1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -440,134 +440,135 @@ states/Start4/node = SubResource("AnimationNodeAnimation_netlp")
 states/Start4/position = Vector2(366, 92)
 transitions = ["Start", "Start4", SubResource("AnimationNodeStateMachineTransition_w6wh1"), "Start4", "Hold4", SubResource("AnimationNodeStateMachineTransition_3hryq"), "Hold4", "End4", SubResource("AnimationNodeStateMachineTransition_fwji2")]
 
-[node name="Judgment" type="Area2D" unique_id=248322553]
+[node name="JudgmentRoot" type="Area2D" unique_id=248322553]
 position = Vector2(158, 192)
 
-[node name="AreaJudgment1" type="Area2D" parent="." unique_id=1932262535]
+[node name="JudgeArea1" type="Area2D" parent="." unique_id=1932262535]
 position = Vector2(443, -12)
 script = ExtResource("1_tyvsn")
+assigned_key = null
 
-[node name="CollisionJudgment1" type="CollisionShape2D" parent="AreaJudgment1" unique_id=202091851]
+[node name="Hitbox1" type="CollisionShape2D" parent="JudgeArea1" unique_id=202091851]
 position = Vector2(-281, 2.5)
 shape = SubResource("RectangleShape2D_tyvsn")
 
-[node name="Judgment1" type="Sprite2D" parent="AreaJudgment1" unique_id=581610713]
+[node name="JudgeSprite1" type="Sprite2D" parent="JudgeArea1" unique_id=581610713]
 position = Vector2(-281, 21)
 texture = ExtResource("3_i3awq")
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 80)
 
-[node name="EffectJudgment1" type="Sprite2D" parent="AreaJudgment1" unique_id=1185298565]
+[node name="EffectJudgment1" type="Sprite2D" parent="JudgeArea1" unique_id=1185298565]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(-281, -77)
 texture = ExtResource("3_uvfgb")
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 130)
 
-[node name="AnimEffectJudgment1" type="AnimationPlayer" parent="AreaJudgment1" unique_id=1040519288]
+[node name="EffectAnim1" type="AnimationPlayer" parent="JudgeArea1" unique_id=1040519288]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_tffnw")
 autoplay = &"Start1"
 
-[node name="AnimJudgment1" type="AnimationTree" parent="AreaJudgment1" unique_id=1345576403]
+[node name="JudgeAnim1" type="AnimationTree" parent="JudgeArea1" unique_id=1345576403]
 root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_rhd3a")
-anim_player = NodePath("../AnimEffectJudgment1")
+anim_player = NodePath("../EffectAnim1")
 
-[node name="AreaJudgment2" type="Area2D" parent="." unique_id=946863638]
+[node name="JudgeArea2" type="Area2D" parent="." unique_id=946863638]
 position = Vector2(443, -12)
 script = ExtResource("1_tyvsn")
 assigned_key = 1
 
-[node name="CollisionJudgment2" type="CollisionShape2D" parent="AreaJudgment2" unique_id=285464307]
+[node name="Hitbox2" type="CollisionShape2D" parent="JudgeArea2" unique_id=285464307]
 position = Vector2(199, 2.5)
 shape = SubResource("RectangleShape2D_uvfgb")
 
-[node name="Judgment2" type="Sprite2D" parent="AreaJudgment2" unique_id=1736442856]
+[node name="JudgeSprite2" type="Sprite2D" parent="JudgeArea2" unique_id=1736442856]
 position = Vector2(199, 21)
 texture = ExtResource("3_i3awq")
 region_enabled = true
 region_rect = Rect2(0, 0, 320, 80)
 
-[node name="EffectJudgment2" type="Sprite2D" parent="AreaJudgment2" unique_id=745410426]
+[node name="EffectJudgment2" type="Sprite2D" parent="JudgeArea2" unique_id=745410426]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(199, -77)
 texture = ExtResource("3_uvfgb")
 region_enabled = true
 region_rect = Rect2(0, 0, 320, 130)
 
-[node name="AnimEffectJudgment2" type="AnimationPlayer" parent="AreaJudgment2" unique_id=1435067004]
+[node name="EffectAnim2" type="AnimationPlayer" parent="JudgeArea2" unique_id=1435067004]
 libraries/ = SubResource("AnimationLibrary_78y61")
 autoplay = &"Start2"
 
-[node name="AnimJudgment2" type="AnimationTree" parent="AreaJudgment2" unique_id=1018500086]
+[node name="JudgeAnim2" type="AnimationTree" parent="JudgeArea2" unique_id=1018500086]
 tree_root = SubResource("AnimationNodeStateMachine_57jvt")
-anim_player = NodePath("../AnimEffectJudgment2")
+anim_player = NodePath("../EffectAnim2")
 
-[node name="AreaJudgment3" type="Area2D" parent="." unique_id=2023443959]
+[node name="JudgeArea3" type="Area2D" parent="." unique_id=2023443959]
 script = ExtResource("1_tyvsn")
 assigned_key = 2
 
-[node name="CollisionJudgment3" type="CollisionShape2D" parent="AreaJudgment3" unique_id=1905185942]
+[node name="Hitbox3" type="CollisionShape2D" parent="JudgeArea3" unique_id=1905185942]
 position = Vector2(962, -9.5)
 shape = SubResource("RectangleShape2D_csqfw")
 
-[node name="Judgment3" type="Sprite2D" parent="AreaJudgment3" unique_id=1685678980]
+[node name="JudgeSprite3" type="Sprite2D" parent="JudgeArea3" unique_id=1685678980]
 position = Vector2(962, 9)
 texture = ExtResource("3_i3awq")
 region_enabled = true
 region_rect = Rect2(0, 0, 320, 80)
 
-[node name="EffectJudgment3" type="Sprite2D" parent="AreaJudgment3" unique_id=1406978898]
+[node name="EffectJudgment3" type="Sprite2D" parent="JudgeArea3" unique_id=1406978898]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(962, -89)
 texture = ExtResource("3_uvfgb")
 region_enabled = true
 region_rect = Rect2(0, 0, 320, 130)
 
-[node name="AnimEffectJudgment3" type="AnimationPlayer" parent="AreaJudgment3" unique_id=1646066326]
+[node name="EffectAnim3" type="AnimationPlayer" parent="JudgeArea3" unique_id=1646066326]
 libraries/ = SubResource("AnimationLibrary_30vgw")
 autoplay = &"Start3"
 
-[node name="AnimJudgment3" type="AnimationTree" parent="AreaJudgment3" unique_id=1159197748]
+[node name="JudgeAnim3" type="AnimationTree" parent="JudgeArea3" unique_id=1159197748]
 tree_root = SubResource("AnimationNodeStateMachine_uvfgb")
-anim_player = NodePath("../AnimEffectJudgment3")
+anim_player = NodePath("../EffectAnim3")
 
-[node name="AreaJudgment4" type="Area2D" parent="." unique_id=88502478]
+[node name="JudgeArea4" type="Area2D" parent="." unique_id=88502478]
 position = Vector2(443, -12)
 script = ExtResource("1_tyvsn")
 assigned_key = 3
 
-[node name="CollisionJudgment4" type="CollisionShape2D" parent="AreaJudgment4" unique_id=1907300813]
+[node name="Hitbox4" type="CollisionShape2D" parent="JudgeArea4" unique_id=1907300813]
 position = Vector2(999, 2.5)
 shape = SubResource("RectangleShape2D_tffnw")
 
-[node name="Judgment4" type="Sprite2D" parent="AreaJudgment4" unique_id=655701388]
+[node name="JudgeSprite4" type="Sprite2D" parent="JudgeArea4" unique_id=655701388]
 position = Vector2(999, 21)
 texture = ExtResource("3_i3awq")
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 80)
 
-[node name="EffectJudgment4" type="Sprite2D" parent="AreaJudgment4" unique_id=1595941539]
+[node name="EffectJudgment4" type="Sprite2D" parent="JudgeArea4" unique_id=1595941539]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(999, -77)
 texture = ExtResource("3_uvfgb")
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 130)
 
-[node name="AnimEffectJudgment4" type="AnimationPlayer" parent="AreaJudgment4" unique_id=179246459]
+[node name="EffectAnim4" type="AnimationPlayer" parent="JudgeArea4" unique_id=179246459]
 libraries/ = SubResource("AnimationLibrary_no81a")
 autoplay = &"Start4"
 
-[node name="AnimJudgment4" type="AnimationTree" parent="AreaJudgment4" unique_id=1122982297]
+[node name="JudgeAnim4" type="AnimationTree" parent="JudgeArea4" unique_id=1122982297]
 tree_root = SubResource("AnimationNodeStateMachine_sef66")
-anim_player = NodePath("../AnimEffectJudgment4")
+anim_player = NodePath("../EffectAnim4")
 
-[connection signal="area_entered" from="AreaJudgment1" to="AreaJudgment1" method="_on_area_entered"]
-[connection signal="area_exited" from="AreaJudgment1" to="AreaJudgment1" method="_on_area_exited"]
-[connection signal="area_entered" from="AreaJudgment2" to="AreaJudgment2" method="_on_area_entered"]
-[connection signal="area_exited" from="AreaJudgment2" to="AreaJudgment2" method="_on_area_exited"]
-[connection signal="area_entered" from="AreaJudgment3" to="AreaJudgment3" method="_on_area_entered"]
-[connection signal="area_exited" from="AreaJudgment3" to="AreaJudgment3" method="_on_area_exited"]
-[connection signal="area_entered" from="AreaJudgment4" to="AreaJudgment4" method="_on_area_entered"]
-[connection signal="area_exited" from="AreaJudgment4" to="AreaJudgment4" method="_on_area_exited"]
+[connection signal="area_entered" from="JudgeArea1" to="JudgeArea1" method="_on_area_entered"]
+[connection signal="area_exited" from="JudgeArea1" to="JudgeArea1" method="_on_area_exited"]
+[connection signal="area_entered" from="JudgeArea2" to="JudgeArea2" method="_on_area_entered"]
+[connection signal="area_exited" from="JudgeArea2" to="JudgeArea2" method="_on_area_exited"]
+[connection signal="area_entered" from="JudgeArea3" to="JudgeArea3" method="_on_area_entered"]
+[connection signal="area_exited" from="JudgeArea3" to="JudgeArea3" method="_on_area_exited"]
+[connection signal="area_entered" from="JudgeArea4" to="JudgeArea4" method="_on_area_entered"]
+[connection signal="area_exited" from="JudgeArea4" to="JudgeArea4" method="_on_area_exited"]
