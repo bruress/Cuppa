@@ -1,18 +1,18 @@
 extends Area2D
 
-# delete note after this Y
+# Delete note after this Y
 const DESPAWN_Y = 450.0
 
-# speed note
+# Speed note
 var speed: float = 0.0
 
-# column
+# Column
 var lane_index: int = 0
 
-# is this obviously a note or hold?
+# Is this obviously a note or hold
 var is_hold: bool = false
 
 func _process(delta: float) -> void:
-	position.y += speed * delta			# move
+	position.y += speed * delta			# Move
 	if global_position.y >= DESPAWN_Y:
-		queue_free()					# delete
+		queue_free()					# Delete
