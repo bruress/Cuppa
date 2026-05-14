@@ -148,15 +148,12 @@ func finish_holding():
 ## Not success hold - coloring and not active
 func break_holding():
 	if is_instance_valid(active_hold_note):
-		active_hold_note.mark_as_miss() 
-		active_hold_note.is_being_held = false 
+		active_hold_note.stop_holding()
 	active_hold_note = null
-	Global.combo = "Miss"
-	Global.combo_score = 0 
 
 	
 func _on_area_entered(area):
-	if area.is_in_group("notes") and area.get("column_index") == int(assigned_key):
+	if area.is_in_group("notes") and area.get("lane_index") == int(assigned_key):
 		notes_in_area.append(area)
 
 func _on_area_exited(area):

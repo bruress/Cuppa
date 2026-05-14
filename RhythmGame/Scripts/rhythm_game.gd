@@ -4,43 +4,43 @@ extends Node2D
 # @export - makes the variable visible in the inspector panel
 @export var songs_library = {
 	"crimson_pulse": {
-		"song": preload("res://Assets/Soundtracks/RhythmGame/CrimsonPulse.wav"),
-		"path_sm": "res://Assets/Soundtracks/RhythmGame/CrimsonPulse.sm",
+		"song": preload("res://RhythmGame/Data/Songs/CrimsonPulse.wav"),
+		"path_sm": "res://RhythmGame/Data/Songs/CrimsonPulse.sm",
 		"bpm": 196.0,
 		"offset": -0.020646,
 		"max_value": 306
 	},
 	"velvet_evening": {
-		"song":preload("res://Assets/Soundtracks/RhythmGame/VelvetEvening.wav"),
-		"path_sm": "res://Assets/Soundtracks/RhythmGame/VelvetEvening.sm",
+		"song":preload("res://RhythmGame/Data/Songs/VelvetEvening.wav"),
+		"path_sm": "res://RhythmGame/Data/Songs/VelvetEvening.sm",
 		"bpm": 145.0,
 		"offset": -0.215708,
 		"max_value": 101
 	},
 	"moonfall": {
-		"song": preload("res://Assets/Soundtracks/RhythmGame/Moonfall.wav"),
-		"path_sm": "res://Assets/Soundtracks/RhythmGame/Moonfall.sm",
+		"song":preload("res://RhythmGame/Data/Songs/Moonfall.wav"),
+		"path_sm": "res://RhythmGame/Data/Songs/Moonfall.sm",
 		"bpm": 184.0,
 		"offset": -0.078104,
 		"max_value": 314
 	},
 	"garliss": {
-		"song": preload("res://Assets/Soundtracks/RhythmGame/Garliss.wav"),
-		"path_sm": "res://Assets/Soundtracks/RhythmGame/Garliss.sm",
+		"song":preload("res://RhythmGame/Data/Songs/Garliss.wav"),
+		"path_sm": "res://RhythmGame/Data/Songs/Garliss.sm",
 		"bpm": 176.0,
 		"offset": -0.316146,
 		"max_value": 194
 	},
 	"night_bloom": {
-		"song": preload("res://Assets/Soundtracks/RhythmGame/NightBloom.wav"),
-		"path_sm": "res://Assets/Soundtracks/RhythmGame/NightBloom.sm",
+		"song":preload("res://RhythmGame/Data/Songs/NightBloom.wav"),
+		"path_sm": "res://RhythmGame/Data/Songs/NightBloom.sm",
 		"bpm": 180.011251,
 		"offset":  -0.019917,
 		"max_value": 198
 	},
 	"bloodroot": {
-		"song": preload("res://Assets/Soundtracks/RhythmGame/Bloodroot.wav"),
-		"path_sm": "res://Assets/Soundtracks/RhythmGame/Bloodroot.sm",
+		"song":preload("res://RhythmGame/Data/Songs/Bloodroot.wav"),
+		"path_sm": "res://RhythmGame/Data/Songs/Bloodroot.sm",
 		"bpm": 160.0,
 		"offset": -0.112229,
 		"max_value": 226
@@ -53,8 +53,8 @@ extends Node2D
 @onready var spawns = [$SpawnPoint1, $SpawnPoint2, $SpawnPoint3, $SpawnPoint4]
 
 ## Load scenes for future instantiation
-var note_scene = preload("res://Scenes/Note.tscn")
-var hold_scene = preload("res://Scenes/LongNote.tscn")
+var note_scene = preload("res://RhythmGame/Scenes/Note.tscn")
+var hold_scene = preload("res://RhythmGame/Scenes/LongNote.tscn")
 
 ## CONST
 ## [MAX_NOTE_SCORE] - base score per note
@@ -168,7 +168,7 @@ func spawn_note(lag: float, line: int):
 	note.global_position = spawn_node.global_position		# place note at the point
 	note.global_position.y += lag*note_speed				# current note position = delay * speed note to lag was not noticeable
 	note.speed = note_speed									# passing along speed to note
-	note.column_index = line								# specify column to note
+	note.lane_index = line									# specify lane to note
 	add_child(note)											# passing along note in the game
 
 ## Spean hold
@@ -182,7 +182,7 @@ func spawn_hold_note(lag: float, line: int, duration: float):
 
 	#add_child(hold) 
 	hold.speed = note_speed									# passing along speed to hold
-	hold.column_index = line								# specify column to hold
+	hold.lane_index = line									# specify lane to hold
 	hold.judgment_y = $Judgment.global_position.y			# passing along judg y
 	
 	add_child(hold) 										# passing along note in the game
