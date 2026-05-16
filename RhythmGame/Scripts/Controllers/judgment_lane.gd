@@ -10,6 +10,8 @@ extends Area2D
 const SCORE_SERVICE = preload("res://RhythmGame/Scripts/Controllers/score_service.gd")
 
 const HOLD_WINDOW: float = 20.0			# Release window near hold end
+const TAP_FEEDBACK_TIME: float = 0.46
+const HOLD_FEEDBACK_TIME: float = 0.70
 
 # Available lane actions
 enum note_keys {S_NOTE, D_NOTE, K_NOTE, L_NOTE}
@@ -35,6 +37,7 @@ var notes_in_area: Array[Area2D] = []
 
 var is_pressing: bool = false			# Pressed now
 var active_hold_note: Area2D = null		# Active hold note in this lane
+var feedback_tween: Tween
 
 ## Finds animation tree among lane children
 func find_current_anim() -> AnimationTree:
@@ -132,14 +135,17 @@ func rating(distance: float) -> void:
 		Global.combo_score = 0
 	else:
 		Global.combo_score += int(result["combo_delta"])
-	apply_feedback_color(result["hit_color"])
+	apply_feedback_color(result["hit_color"], TAP_FEEDBACK_TIME)
 
 ## Colors lane feedback and fades back
 ## [color] - Color for this hit result
-func apply_feedback_color(color: Color) -> void:
+## [fade_time] - Fade duration in seconds
+func apply_feedback_color(color: Color, fade_time: float = TAP_FEEDBACK_TIME) -> void:
+	if feedback_tween and is_instance_valid(feedback_tween):
+		feedback_tween.kill()
 	feedback_sprite.modulate = color
-	var tween = create_tween()
-	tween.tween_property(feedback_sprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.35).set_trans(Tween.TRANS_SINE)
+	feedback_tween = create_tween()
+	feedback_tween.tween_property(feedback_sprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), fade_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 ## Handles key release for active hold
 func break_holding() -> void:
@@ -148,6 +154,11 @@ func break_holding() -> void:
 		active_hold_note.stop_holding()
 	# Clear active hold reference in lane
 	active_hold_note = null
+
+## Applies lane feedback from hold result
+## [hit_color] - Hold judgment color
+func _on_hold_feedback(hit_color: Color) -> void:
+	apply_feedback_color(hit_color, HOLD_FEEDBACK_TIME)
 
 ## Gets closest note to lane judgment
 func get_closest_note() -> Area2D:
@@ -174,6 +185,10 @@ func get_note_judgment_distance(note: Area2D) -> float:
 func _on_area_entered(area: Area2D) -> void:
 	# Keep only notes from this lane
 	if area.is_in_group("notes") and area.get("line_index") == int(assigned_key):
+		# Connect hold feedback early, so hold miss color also reaches lane
+		if (area.get("is_hold") == true):
+			if not area.is_connected("hold_feedback", Callable(self, "_on_hold_feedback")):
+				area.connect("hold_feedback", Callable(self, "_on_hold_feedback"))
 		# Add note to lane queue
 		notes_in_area.append(area)
 
@@ -190,6 +205,7 @@ func _on_area_exited(area: Area2D) -> void:
 	Global.combo = "Miss"
 	Global.combo_score = 0
 	Global.judged_count += 1
+	apply_feedback_color(SCORE_SERVICE.MISS_COLOR)
 		
 
 		

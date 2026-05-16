@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hold_feedback(hit_color: Color)
+
 # Parts of hold note
 @onready var head = $HeadSprite
 @onready var body = $Body
@@ -96,6 +98,7 @@ func apply_hold_result(progress: float) -> void:
 	Global.score += int(result["score_delta"])
 	Global.combo_score += int(result["combo_delta"])
 	Global.judged_count += 1
+	hold_feedback.emit(result["hit_color"])
 	was_scored = true
 
 ## Mark miss
@@ -105,5 +108,6 @@ func mark_as_miss() -> void:
 	Global.combo = "Miss"
 	Global.combo_score = 0
 	Global.judged_count += 1
+	hold_feedback.emit(SCORE_SERVICE.MISS_COLOR)
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(0.3, 0.3, 0.3, 0.5), 0.3)

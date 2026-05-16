@@ -54,15 +54,18 @@ static func evaluate_hold_progress(progress: float) -> Dictionary:
 			"combo_text": "Bloody bite",
 			"score_delta": PERFECT_SCORE,
 			"combo_delta": COMBO_STEP,
+			"hit_color": PERFECT_COLOR,
 		}
 	if progress >= 0.50:
 		return {
 			"combo_text": "Bloody",
 			"score_delta": GOOD_SCORE,
 			"combo_delta": COMBO_STEP,
+			"hit_color": GOOD_COLOR,
 		}
 	return {
 		"combo_text": "Lame",
 		"score_delta": LAME_SCORE,
 		"combo_delta": COMBO_STEP,
+		"hit_color": LAME_COLOR,
 	}

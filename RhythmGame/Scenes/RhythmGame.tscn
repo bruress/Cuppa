@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://joc05kyhggsy" path="res://RhythmGame/Scenes/Judgment.tscn" id="4_4pv4x"]
 [ext_resource type="Texture2D" uid="uid://0egkjcm7myqs" path="res://RhythmGame/Assets/Sprites/Background/Black.png" id="5_hlh0i"]
 [ext_resource type="Texture2D" uid="uid://bdo7567mau63x" path="res://RhythmGame/Assets/VFX/Effects/Sparkle.png" id="6_hlh0i"]
-[ext_resource type="Script" path="res://RhythmGame/Scripts/UI/floating_shapes_layer.gd" id="6_sylg4"]
+[ext_resource type="Script" uid="uid://ekaes8exeh26" path="res://RhythmGame/Scripts/UI/floating_shapes_layer.gd" id="6_sylg4"]
 [ext_resource type="Texture2D" uid="uid://dvlx47lc5ocq4" path="res://RhythmGame/Assets/Sprites/Background/BackgroundAnimation.png" id="7_pei41"]
 [ext_resource type="Texture2D" uid="uid://drknynm8y8lph" path="res://RhythmGame/Assets/Sprites/Ligths/light.png" id="7_pqfdq"]
 

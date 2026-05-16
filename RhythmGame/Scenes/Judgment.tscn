@@ -446,7 +446,6 @@ position = Vector2(158, 192)
 [node name="JudgeArea1" type="Area2D" parent="." unique_id=1932262535]
 position = Vector2(443, -12)
 script = ExtResource("1_tyvsn")
-assigned_key = null
 
 [node name="Hitbox1" type="CollisionShape2D" parent="JudgeArea1" unique_id=202091851]
 position = Vector2(-281, 2.5)

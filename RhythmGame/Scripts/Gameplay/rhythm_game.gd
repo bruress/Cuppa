@@ -3,6 +3,7 @@ extends Node2D
 const SM_PARSER = preload("res://RhythmGame/Scripts/Parsing/sm_parser.gd")
 const SIDE_LIGHTS_CONTROLLER = preload("res://RhythmGame/Scripts/UI/side_lights_controller.gd")
 const SONGS_LIBRARY_DATA = preload("res://RhythmGame/Scripts/State/songs_library.gd")
+const POP_UI = preload("res://RhythmGame/Scripts/UI/pop_effect.gd")
 
 @export var songs_library = SONGS_LIBRARY_DATA.SONGS_LIBRARY
 
@@ -10,12 +11,17 @@ const SONGS_LIBRARY_DATA = preload("res://RhythmGame/Scripts/State/songs_library
 @onready var spawns = [$SpawnPoint1, $SpawnPoint2, $SpawnPoint3, $SpawnPoint4]
 @onready var light_left: Sprite2D = $LightLeft
 @onready var light_right: Sprite2D = $LightRight
+@onready var combo_label: Label = $Combo
+@onready var combo_score_label: Label = $ComboScore
+@onready var combo_text_label: Label = $ComboText
 
 var note_scene = preload("res://RhythmGame/Scenes/Note.tscn")
 var hold_scene = preload("res://RhythmGame/Scenes/LongNote.tscn")
 
 const MAX_NOTE_SCORE: int = 10		# Base score per note
 const BEATS_TO_TARGET: int = 5		# Travel time in beats (control note speed)
+const PROGRESS_SMOOTH_SPEED: float = 3.2
+const COMBO_UI_FADE_SPEED: float = 6.0
 
 var bpm: float = 0.0
 var beat: float = 0.0
@@ -31,8 +37,11 @@ var song_key: String = "bloodroot"
 var progress_value: float = 100.0
 var light_left_base_alpha: float = 0.0
 var light_right_base_alpha: float = 0.0
+var last_combo_score: int = 0
+var combo_ui_alpha: float = 0.0
 
 var side_lights_controller = SIDE_LIGHTS_CONTROLLER.new()
+var pop_controller = POP_UI.new()
 
 ## Initialize game
 func _ready() -> void:
@@ -91,11 +100,12 @@ func spawn_hold_note(lag: float, line_index: int, duration: float) -> void:
 ## Main game update
 func _process(delta: float) -> void:
 	update_progress_bar(delta)
-	update_ui()
+	update_ui(delta)
 
 	# Boost background when combo is high
 	update_back(delta)
 	update_lights(delta)
+	update_combo_pop()
 
 	game_time += delta
 	var current_sync_time: float = get_current_sync_time()
@@ -103,10 +113,22 @@ func _process(delta: float) -> void:
 	try_start_audio()
 
 ## Updates score and combo labels
-func update_ui() -> void:
+func update_ui(delta: float) -> void:
 	$Score.text = str(Global.score)
-	$ComboText.text = Global.combo
-	$ComboScore.text = str(Global.combo_score)
+	combo_text_label.text = Global.combo
+	combo_score_label.text = str(Global.combo_score)
+
+	# Smooth show/hide combo UI
+	var has_combo: bool = (Global.combo_score > 0)
+	var target_alpha: float = 1.0 if has_combo else 0.0
+	combo_ui_alpha = lerp(combo_ui_alpha, target_alpha, min(delta * COMBO_UI_FADE_SPEED, 1.0))
+
+	combo_label.visible = true
+	combo_text_label.visible = true
+	combo_score_label.visible = true
+	combo_label.modulate.a = combo_ui_alpha
+	combo_text_label.modulate.a = combo_ui_alpha
+	combo_score_label.modulate.a = combo_ui_alpha
 
 ## Updates background speed and blackout
 func update_back(delta) -> void:
@@ -120,6 +142,14 @@ func update_back(delta) -> void:
 ## Updates lights
 func update_lights(delta) -> void:
 	side_lights_controller.update_lights(light_left, light_right, light_left_base_alpha, light_right_base_alpha, game_time, Global.combo_score, delta)
+
+## Updates combo pop effect
+func update_combo_pop() -> void:
+	# Trigger pop only when combo score really grows
+	if (Global.combo_score > last_combo_score):
+		pop_controller.pop_label(combo_score_label)
+		pop_controller.pop_label(combo_text_label)
+	last_combo_score = Global.combo_score
 
 ## Returns synchronized song time
 func get_current_sync_time() -> float:
