@@ -9,6 +9,8 @@ extends Area2D
 # Shared score rules and colors
 const SCORE_SERVICE = preload("res://RhythmGame/Scripts/Controllers/score_service.gd")
 
+const HOLD_WINDOW: float = 20.0			# Release window near hold end
+
 # Available lane actions
 enum note_keys {S_NOTE, D_NOTE, K_NOTE, L_NOTE}
 
@@ -64,7 +66,7 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# Get action for this lane
 	var action = key_map[assigned_key]
-	
+
 	# Key pressed
 	if event.is_action_pressed(action):
 		# Lane is pressed now
@@ -86,48 +88,50 @@ func _unhandled_input(event: InputEvent) -> void:
 		if active_hold_note:
 			break_holding()
 
-## Tries to hit the first note in lane queue
+## Tries to hit the closest note in lane queue
 func handle_note_hit() -> void:
-	# No notes here
-	if notes_in_area.is_empty():
+	# Take closest note to judgment line
+	var note := get_closest_note()
+	# Note is existing
+	if not is_instance_valid(note):
 		return
 
-	# Take first note in queue
-	var note := notes_in_area[0]
+	var distance: float = get_note_judgment_distance(note)		# Distance to judge
+	var is_hold_note = note.get("is_hold") == true				# Check note type
+	
+	var hit_window_px: float = SCORE_SERVICE.LAME_WINDOW_PX		# Wider
+	if (is_hold_note):
+		hit_window_px += HOLD_WINDOW
 
-	# Check note type
-	var is_hold_note = note.get("is_hold") == true
+	# Ignore press if note is outside hit window
+	if (distance > hit_window_px):
+		return
 	if is_hold_note:
 		# Save active hold
 		active_hold_note = note
-		rating(abs(global_position.y - note.global_position.y))
 		note.start_holding()
 		# Remove processed note
-		notes_in_area.remove_at(0)
+		notes_in_area.erase(note)
 		return
 
 	# Tap note
-	rating(abs(global_position.y - note.global_position.y))
+	rating(distance)
 	note.queue_free()
 	# Remove processed note
-	notes_in_area.remove_at(0)
+	notes_in_area.erase(note)
 
 ## Applies score result by distance
 ## [distance] - Distance between judgment and note
 func rating(distance: float) -> void:
 	# Get hit result from score rules
 	var result: Dictionary = SCORE_SERVICE.evaluate_distance(distance)
-	# Update combo text
+	Global.judged_count += 1		# For progress bar
 	Global.combo = result["combo_text"]
-	# Add score points for this hit
 	Global.score += int(result["score_delta"])
-	# Miss resets combo score
 	if (Global.combo == "Miss"):
 		Global.combo_score = 0
-	# Non-miss adds combo score
 	else:
 		Global.combo_score += int(result["combo_delta"])
-	# Paint lane feedback color
 	apply_feedback_color(result["hit_color"])
 
 ## Colors lane feedback and fades back
@@ -135,7 +139,7 @@ func rating(distance: float) -> void:
 func apply_feedback_color(color: Color) -> void:
 	feedback_sprite.modulate = color
 	var tween = create_tween()
-	tween.tween_property(feedback_sprite, "modulate", Color("f7dcdc"), 0.35).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(feedback_sprite, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.35).set_trans(Tween.TRANS_SINE)
 
 ## Handles key release for active hold
 func break_holding() -> void:
@@ -145,30 +149,47 @@ func break_holding() -> void:
 	# Clear active hold reference in lane
 	active_hold_note = null
 
-	
+## Gets closest note to lane judgment
+func get_closest_note() -> Area2D:
+	var closest_note: Area2D = null
+	var closest_distance: float = INF
+	for note in notes_in_area:
+		var distance: float = get_note_judgment_distance(note)
+		# Update new closet distance and closest note
+		if (distance < closest_distance):
+			closest_distance = distance
+			closest_note = note
+	return closest_note
+
+## Gets note distance to lane judgment
+func get_note_judgment_distance(note: Area2D) -> float:
+	# For hold use head position, not root
+	if (note.get("is_hold") == true):
+		var head_node: Node = note.get_node_or_null("HeadSprite")
+		if (head_node and head_node is Node2D):
+			return abs(global_position.y - head_node.global_position.y)
+	return abs(global_position.y - note.global_position.y)
+
 ## Handles note enter
-## [area] - Entered area
 func _on_area_entered(area: Area2D) -> void:
 	# Keep only notes from this lane
-	if area.is_in_group("notes") and area.get("lane_index") == int(assigned_key):
+	if area.is_in_group("notes") and area.get("line_index") == int(assigned_key):
 		# Add note to lane queue
 		notes_in_area.append(area)
 
 ## Tracks notes leaving area and applies miss when needed
-## [area] - Area that exited
 func _on_area_exited(area: Area2D) -> void:
-	# Ignore unrelated exits
+	# Not our note -> skip
 	if not (area in notes_in_area):
 		return
 	notes_in_area.erase(area)
-	# Active hold release is handled in hold note logic
-	if area == active_hold_note:
-		return
-	if area.get("is_finished") == true:
+	# Hold miss is handled in hold script
+	if (area.get("is_hold") == true):
 		return
 	# Remaining case means a miss
 	Global.combo = "Miss"
-	Global.combo_score = 0 
+	Global.combo_score = 0
+	Global.judged_count += 1
 		
 
 		

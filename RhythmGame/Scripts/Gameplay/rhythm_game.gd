@@ -1,74 +1,38 @@
 extends Node2D
 
 const SM_PARSER = preload("res://RhythmGame/Scripts/Parsing/sm_parser.gd")
+const SIDE_LIGHTS_CONTROLLER = preload("res://RhythmGame/Scripts/UI/side_lights_controller.gd")
+const SONGS_LIBRARY_DATA = preload("res://RhythmGame/Scripts/State/songs_library.gd")
 
-## Data for all songs
-@export var songs_library = {
-	"crimson_pulse": {
-		"song": preload("res://RhythmGame/Data/Songs/CrimsonPulse.wav"),
-		"path_sm": "res://RhythmGame/Data/Songs/CrimsonPulse.sm",
-		"bpm": 196.0,
-		"offset": -0.020646,
-		"max_value": 306
-	},
-	"velvet_evening": {
-		"song":preload("res://RhythmGame/Data/Songs/VelvetEvening.wav"),
-		"path_sm": "res://RhythmGame/Data/Songs/VelvetEvening.sm",
-		"bpm": 145.0,
-		"offset": -0.215708,
-		"max_value": 101
-	},
-	"moonfall": {
-		"song":preload("res://RhythmGame/Data/Songs/Moonfall.wav"),
-		"path_sm": "res://RhythmGame/Data/Songs/Moonfall.sm",
-		"bpm": 184.0,
-		"offset": -0.078104,
-		"max_value": 314
-	},
-	"garliss": {
-		"song":preload("res://RhythmGame/Data/Songs/Garliss.wav"),
-		"path_sm": "res://RhythmGame/Data/Songs/Garliss.sm",
-		"bpm": 176.0,
-		"offset": -0.316146,
-		"max_value": 194
-	},
-	"night_bloom": {
-		"song":preload("res://RhythmGame/Data/Songs/NightBloom.wav"),
-		"path_sm": "res://RhythmGame/Data/Songs/NightBloom.sm",
-		"bpm": 180.011251,
-		"offset":  -0.019917,
-		"max_value": 198
-	},
-	"bloodroot": {
-		"song":preload("res://RhythmGame/Data/Songs/Bloodroot.wav"),
-		"path_sm": "res://RhythmGame/Data/Songs/Bloodroot.sm",
-		"bpm": 160.0,
-		"offset": -0.112229,
-		"max_value": 226
-	}
-}
+@export var songs_library = SONGS_LIBRARY_DATA.SONGS_LIBRARY
 
 @onready var audio = $SongPlayer
 @onready var spawns = [$SpawnPoint1, $SpawnPoint2, $SpawnPoint3, $SpawnPoint4]
+@onready var light_left: Sprite2D = $LightLeft
+@onready var light_right: Sprite2D = $LightRight
 
-## Load scenes
 var note_scene = preload("res://RhythmGame/Scenes/Note.tscn")
 var hold_scene = preload("res://RhythmGame/Scenes/LongNote.tscn")
 
-const MAX_NOTE_SCORE: int = 10		# base score per note
-const BEATS_TO_TARGET: int = 5		# travel time in beats (control note speed)
+const MAX_NOTE_SCORE: int = 10		# Base score per note
+const BEATS_TO_TARGET: int = 5		# Travel time in beats (control note speed)
 
-var bpm: float = 0.0				# beat per minute
-var beat: float = 0.0				# beat in second
-var note_speed: float = 0.0			# (distance/travel_time)
-var travel_time: float = 0.0		# time to reach judge
-var audio_started: bool = false		# to control start/stop music
+var bpm: float = 0.0
+var beat: float = 0.0
+var note_speed: float = 0.0			# (Distance / travel_time)
+var travel_time: float = 0.0		# Time to reach judge
+var audio_started: bool = false
 
-var game_time: float = 0.0			# global timer for sync
-var is_playing: bool = false		# pause/stop
+var game_time: float = 0.0			# Global timer for sync
+var is_playing: bool = false		# Pause/stop
 
-var all_notes_data: Array = []		# parsed data for all notes and holds
-var song_key: String = "bloodroot"	# to choose current song
+var all_notes_data: Array = []
+var song_key: String = "bloodroot"
+var progress_value: float = 100.0
+var light_left_base_alpha: float = 0.0
+var light_right_base_alpha: float = 0.0
+
+var side_lights_controller = SIDE_LIGHTS_CONTROLLER.new()
 
 ## Initialize game
 func _ready() -> void:
@@ -80,57 +44,59 @@ func _ready() -> void:
 	travel_time = beat * BEATS_TO_TARGET
 	var distance: float = abs(spawns[0].global_position.y - $JudgmentRoot.global_position.y)
 	note_speed = distance / travel_time
-	
-	all_notes_data = SM_PARSER.full_parser(data["path_sm"], beat, data["offset"])
+
+	all_notes_data = SM_PARSER.full_parser(data["path_sm"], beat, data["offset"])		# Parsing
+
+	$ProgressBar.modulate = Color(1.0, 1.0, 1.0, 0.82)
+	$ProgressBar.value = 100.0
+	light_left_base_alpha = light_left.modulate.a
+	light_right_base_alpha = light_right.modulate.a
 	start_game(data)
 
 ## Start game
 ## [song_data] - dictionary with all data of songs to take song name
 func start_game(song_data: Dictionary) -> void:
 	audio.stream = song_data["song"]
-	game_time -=travel_time
+	game_time -= travel_time
 	is_playing = true
-	audio_started = false									# to play music after offset to hit in the beat
+	audio_started = false									# To play music after offset to hit in the beat
 
 ## Spawn note
 ## [lag] - delay with computer draw and current time
-## [lane_index] - note lane
-func spawn_note(lag: float, lane_index: int) -> void:
+## [line_index] - note lane
+func spawn_note(lag: float, line_index: int) -> void:
 	var note = note_scene.instantiate()
-	var spawn_node = spawns[lane_index]
+	var spawn_node = spawns[line_index]
 	note.global_position = spawn_node.global_position
 	note.global_position.y += lag*note_speed
 	note.speed = note_speed
-	note.lane_index = lane_index
+	note.line_index = line_index
 	add_child(note)
 
 ## Spawn hold
 ## [lag] - delay with computer draw and current time
-## [lane_index] - hold lane
-func spawn_hold_note(lag: float, lane_index: int, duration: float) -> void:
+## [line_index] - hold lane
+func spawn_hold_note(lag: float, line_index: int, duration: float) -> void:
 	var hold = hold_scene.instantiate()
-	var spawn_node = spawns[lane_index]
+	var spawn_node = spawns[line_index]
 	hold.global_position = spawn_node.global_position
 	hold.global_position.y += lag * note_speed
 	hold.speed = note_speed
-	hold.lane_index = lane_index
+	hold.line_index = line_index
 	hold.judgment_y = $JudgmentRoot.global_position.y
 	add_child(hold)
-	
-	# after to appear hold in the scene to call it without any error
-	var length = duration * note_speed						# hold lenght = duration * speed (pixel)
+	var length = duration * note_speed
 	hold.setup_hold(length)
 	
 ## Main game update
 func _process(delta: float) -> void:
-	var song_data: Dictionary = songs_library[song_key]
-	var max_value: int = song_data["max_value"]
-	update_progress_bar(max_value)
-	
-	if not is_playing:
-		return
-
+	update_progress_bar(delta)
 	update_ui()
+
+	# Boost background when combo is high
+	update_back(delta)
+	update_lights(delta)
+
 	game_time += delta
 	var current_sync_time: float = get_current_sync_time()
 	spawn_due_notes(current_sync_time)
@@ -142,38 +108,49 @@ func update_ui() -> void:
 	$ComboText.text = Global.combo
 	$ComboScore.text = str(Global.combo_score)
 
+## Updates background speed and blackout
+func update_back(delta) -> void:
+	if (Global.combo_score >= 30):
+		$BackgroundAnim.speed_scale = lerp($BackgroundAnim.speed_scale, 1.30, min(delta * 4.0, 1.0))
+		$BackgroundAnim.modulate = $BackgroundAnim.modulate.lerp(Color(0.75, 0.75, 0.75, 1.0), min(delta * 4.0, 1.0))
+	else:
+		$BackgroundAnim.speed_scale = lerp($BackgroundAnim.speed_scale, 1.0, min(delta * 4.0, 1.0))
+		$BackgroundAnim.modulate = $BackgroundAnim.modulate.lerp(Color(1.0, 1.0, 1.0, 1.0), min(delta * 4.0, 1.0))
+
+## Updates lights
+func update_lights(delta) -> void:
+	side_lights_controller.update_lights(light_left, light_right, light_left_base_alpha, light_right_base_alpha, game_time, Global.combo_score, delta)
+
 ## Returns synchronized song time
 func get_current_sync_time() -> float:
 	var song_pos: float = 0.0
 	if audio.playing:
-		song_pos = audio.get_playback_position() + AudioServer.get_time_since_last_mix() # audio_player time + time with last update my audio servers
-		song_pos -= AudioServer.get_output_latency()		# minus lag my audio server output
+		song_pos = audio.get_playback_position() + AudioServer.get_time_since_last_mix() 	# Audio_player time + time last update my audio servers
+		song_pos -= AudioServer.get_output_latency()		# Minus lag my audio server output
 	else:
 		song_pos = game_time
 	return song_pos
 
 ## Spawns notes when their spawn time is reached
 func spawn_due_notes(current_sync_time: float) -> void:
-	while not all_notes_data.is_empty():					# while we have notes
-		var note_time = all_notes_data[0].time				# time first note in the queue
+	while not all_notes_data.is_empty():
+		var note_time = all_notes_data[0].time				# First note in the queue
 
-		if current_sync_time >= (note_time - travel_time):	# if current time >= time_note - time_travel
-			var data = all_notes_data.pop_front()			# delete this note from queue and take it date 
-			var lag = current_sync_time - (data.time - travel_time) # lag of swapn
-			
+		if current_sync_time >= (note_time - travel_time):
+			var data = all_notes_data.pop_front()			# Delete this note from queue and take it date 
+			var lag = current_sync_time - (data.time - travel_time)
 			if data.type == "note":
 				spawn_note(lag, data.lane)
 			elif data.type == "hold":
 				spawn_hold_note(lag, data.lane, data.duration)
-		
-		else:												# waiting next frame
+		else:
 			break
 
-## Starts audio once game time reaches zero
+## Starts audio once game time
 func try_start_audio() -> void:
-	if not audio_started and game_time >= 0:				# if audio isn't started and game isn't started too
-		audio.play()										# start music
-		audio_started = true								# flag is true to don't start it again
+	if not audio_started and game_time >= 0:
+		audio.play()
+		audio_started = true
 
 ## Stop game
 func stop_game() -> void:
@@ -181,10 +158,12 @@ func stop_game() -> void:
 	audio.stop()
 
 ## Manage progress bar 
-## [max_value] - count of notes 
-func update_progress_bar(max_value: int) -> void:
-	if Global.score>0:
-		var val = 100 - ((float(Global.score) / (max_value*MAX_NOTE_SCORE)) * 100.0)
-		var pbar = clamp(val, 0, 100)
-		var tween = create_tween()
-		tween.tween_property($ProgressBar, "value", pbar, 0.3).set_trans(Tween.TRANS_SINE)
+func update_progress_bar(delta: float) -> void:
+	if (Global.judged_count <= 0):
+		$ProgressBar.value = 100
+		return
+	var max_score_so_far: float = float(Global.judged_count * MAX_NOTE_SCORE)
+	var accuracy: float = (float(Global.score) / max_score_so_far) * 100.0
+	var target_value: float = clamp(accuracy, 0.0, 100.0)
+	progress_value = lerp(progress_value, target_value, min(delta * 6.0, 1.0))
+	$ProgressBar.value = progress_value

@@ -506,22 +506,23 @@ tree_root = SubResource("AnimationNodeStateMachine_57jvt")
 anim_player = NodePath("../EffectAnim2")
 
 [node name="JudgeArea3" type="Area2D" parent="." unique_id=2023443959]
+position = Vector2(443, -12)
 script = ExtResource("1_tyvsn")
 assigned_key = 2
 
 [node name="Hitbox3" type="CollisionShape2D" parent="JudgeArea3" unique_id=1905185942]
-position = Vector2(962, -9.5)
+position = Vector2(519, 2.5)
 shape = SubResource("RectangleShape2D_csqfw")
 
 [node name="JudgeSprite3" type="Sprite2D" parent="JudgeArea3" unique_id=1685678980]
-position = Vector2(962, 9)
+position = Vector2(519, 21)
 texture = ExtResource("3_i3awq")
 region_enabled = true
 region_rect = Rect2(0, 0, 320, 80)
 
 [node name="EffectJudgment3" type="Sprite2D" parent="JudgeArea3" unique_id=1406978898]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(962, -89)
+position = Vector2(519, -77)
 texture = ExtResource("3_uvfgb")
 region_enabled = true
 region_rect = Rect2(0, 0, 320, 130)

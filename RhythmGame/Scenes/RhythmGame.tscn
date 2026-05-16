@@ -5,7 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://joc05kyhggsy" path="res://RhythmGame/Scenes/Judgment.tscn" id="4_4pv4x"]
 [ext_resource type="Texture2D" uid="uid://0egkjcm7myqs" path="res://RhythmGame/Assets/Sprites/Background/Black.png" id="5_hlh0i"]
 [ext_resource type="Texture2D" uid="uid://bdo7567mau63x" path="res://RhythmGame/Assets/VFX/Effects/Sparkle.png" id="6_hlh0i"]
+[ext_resource type="Script" path="res://RhythmGame/Scripts/UI/floating_shapes_layer.gd" id="6_sylg4"]
 [ext_resource type="Texture2D" uid="uid://dvlx47lc5ocq4" path="res://RhythmGame/Assets/Sprites/Background/BackgroundAnimation.png" id="7_pei41"]
+[ext_resource type="Texture2D" uid="uid://drknynm8y8lph" path="res://RhythmGame/Assets/Sprites/Ligths/light.png" id="7_pqfdq"]
 
 [sub_resource type="Gradient" id="Gradient_hlh0i"]
 offsets = PackedFloat32Array(0.6328125, 1)
@@ -216,7 +218,24 @@ position = Vector2(-0.99992466, 0)
 scale = Vector2(0.9707071, 1)
 texture = ExtResource("5_hlh0i")
 
+[node name="FloatingShapesLayer" type="Node2D" parent="." unique_id=1218753001]
+z_index = 10
+script = ExtResource("6_sylg4")
+shape_texture = ExtResource("6_hlh0i")
+
 [node name="SparkleVfx" type="Sprite2D" parent="." unique_id=476961327]
 visible = false
-scale = Vector2(1.6023738, 1.6023738)
+scale = Vector2(2.602, 2.602)
 texture = ExtResource("6_hlh0i")
+
+[node name="LightRight" type="Sprite2D" parent="." unique_id=354581229]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(546, -509)
+scale = Vector2(0.5604999, 0.5604999)
+texture = ExtResource("7_pqfdq")
+
+[node name="LightLeft" type="Sprite2D" parent="." unique_id=303209313]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(-528.00006, -533)
+scale = Vector2(0.6030801, 0.6030801)
+texture = ExtResource("7_pqfdq")
