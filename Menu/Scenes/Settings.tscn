@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://r3h2nn6jspev"]
 
-[ext_resource type="Script" uid="uid://te7btcmwdmxc" path="res://Menu/Scripts/settings_overlay.gd" id="1_2syq2"]
+[ext_resource type="Script" uid="uid://te7btcmwdmxc" path="res://Menu/Scripts/Settings/settings_overlay.gd" id="1_7ci0n"]
 [ext_resource type="FontFile" uid="uid://dywnaw85dvwck" path="res://Assets/Fonts/MarckScript-Regular.ttf" id="3_6n9ht"]
 
 [sub_resource type="Shader" id="Shader_q1x8g"]
@@ -79,7 +79,7 @@ corner_radius_bottom_left = 12
 
 [node name="SettingsOverlay" type="CanvasLayer" unique_id=1125648634]
 layer = 100
-script = ExtResource("1_2syq2")
+script = ExtResource("1_7ci0n")
 
 [node name="Blur" type="ColorRect" parent="." unique_id=735613014]
 material = SubResource("ShaderMaterial_u8x5r")

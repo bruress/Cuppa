@@ -32,6 +32,6 @@ func update_lights(
 		if not is_instance_valid(light):
 			continue
 		var base_alpha: float = base_alphas[i]
-		var sign: float = 1.0 if i % 2 == 0 else -1.0
-		var target_alpha: float = clamp(base_alpha + (pulse * sign), 0.0, 1.0)
+		var pulse_direction: float = 1.0 if i % 2 == 0 else -1.0
+		var target_alpha: float = clamp(base_alpha + (pulse * pulse_direction), 0.0, 1.0)
 		light.modulate.a = lerp(light.modulate.a, target_alpha, t)

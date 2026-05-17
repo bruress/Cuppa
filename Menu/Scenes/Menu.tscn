@@ -2,11 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://c3s2rgnj4pcwx" path="res://Menu/Assets/Background/BackgroundMenu.png" id="2_1lm7l"]
 [ext_resource type="FontFile" uid="uid://w6646dghk3wy" path="res://Assets/Fonts/GiveYouGlory-Regular.ttf" id="2_332dp"]
-[ext_resource type="Script" uid="uid://ekaes8exeh26" path="res://RhythmGame/Scripts/UI/floating_shapes_layer.gd" id="3_y21l4"]
-[ext_resource type="Texture2D" uid="uid://bdo7567mau63x" path="res://RhythmGame/Assets/VFX/Effects/Sparkle.png" id="4_p4p8b"]
 [ext_resource type="Texture2D" uid="uid://0egkjcm7myqs" path="res://RhythmGame/Assets/Sprites/Background/Black.png" id="5_p4p8b"]
 [ext_resource type="Texture2D" uid="uid://drknynm8y8lph" path="res://RhythmGame/Assets/Sprites/Ligths/light.png" id="6_wdime"]
-[ext_resource type="Script" uid="uid://cm1mbesgw5n3p" path="res://Menu/Scripts/menu.gd" id="7_menu"]
+[ext_resource type="Script" uid="uid://ceb1kql4qgeo2" path="res://Menu/Scripts/menu.gd" id="7_menu"]
 [ext_resource type="Texture2D" uid="uid://dqjdf682kmq6w" path="res://Menu/Assets/Background/Background.png" id="8_ttipc"]
 [ext_resource type="FontFile" uid="uid://dywnaw85dvwck" path="res://Assets/Fonts/MarckScript-Regular.ttf" id="9_oxlmi"]
 [ext_resource type="AudioStream" uid="uid://cs5me01c2si7g" path="res://Menu/Data/Songs/MenuTheme.mp3" id="10_oqrcm"]
@@ -486,9 +484,6 @@ texture = ExtResource("8_ttipc")
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1672459886]
 
 [node name="FloatingShapesLayer" type="Node2D" parent="." unique_id=156873250]
-script = ExtResource("3_y21l4")
-shape_texture = ExtResource("4_p4p8b")
-max_scale = 0.95
 
 [node name="Light1" type="Sprite2D" parent="." unique_id=2014270512]
 modulate = Color(1, 1, 1, 0.19607843)
@@ -596,3 +591,4 @@ default_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
 [node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=415781975]
 stream = ExtResource("10_oqrcm")
 autoplay = true
+parameters/looping = true
