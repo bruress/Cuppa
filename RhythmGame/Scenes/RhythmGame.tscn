@@ -63,10 +63,10 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bka4r")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_d31g0")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_d53af")
 }, {
 "duration": 1.0,
@@ -189,19 +189,19 @@ position = Vector2(-803, 424)
 
 [node name="SpawnPoint1" type="Marker2D" parent="." unique_id=628365565]
 top_level = true
-position = Vector2(-440, -660)
+position = Vector2(-440, -700)
 
 [node name="SpawnPoint2" type="Marker2D" parent="." unique_id=711852508]
 top_level = true
-position = Vector2(-137, -660)
+position = Vector2(-137, -700)
 
 [node name="SpawnPoint3" type="Marker2D" parent="." unique_id=865503663]
 top_level = true
-position = Vector2(141, -660)
+position = Vector2(141, -700)
 
 [node name="SpawnPoint4" type="Marker2D" parent="." unique_id=1210923957]
 top_level = true
-position = Vector2(440, -660)
+position = Vector2(440, -700)
 
 [node name="SongPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1447314760]
 

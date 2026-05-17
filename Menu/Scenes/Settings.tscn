@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://r3h2nn6jspev"]
+
+[ext_resource type="Script" uid="uid://te7btcmwdmxc" path="res://Menu/Scripts/settings_overlay.gd" id="1_2syq2"]
+[ext_resource type="FontFile" uid="uid://dywnaw85dvwck" path="res://Assets/Fonts/MarckScript-Regular.ttf" id="3_6n9ht"]
+
+[sub_resource type="Shader" id="Shader_q1x8g"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_tex : hint_screen_texture, repeat_disable, filter_linear_mipmap;
+uniform float blur_strength : hint_range(0.0, 4.0) = 2.4;
+
+void fragment() {
+	vec2 uv = SCREEN_UV;
+	vec2 px = SCREEN_PIXEL_SIZE * blur_strength;
+	vec4 c = texture(screen_tex, uv) * 0.28;
+	c += texture(screen_tex, uv + vec2(px.x, 0.0)) * 0.16;
+	c += texture(screen_tex, uv - vec2(px.x, 0.0)) * 0.16;
+	c += texture(screen_tex, uv + vec2(0.0, px.y)) * 0.16;
+	c += texture(screen_tex, uv - vec2(0.0, px.y)) * 0.16;
+	c += texture(screen_tex, uv + px) * 0.04;
+	c += texture(screen_tex, uv - px) * 0.04;
+	COLOR = c;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u8x5r"]
+shader = SubResource("Shader_q1x8g")
+shader_parameter/blur_strength = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.14117648, 0.06666667, 0.08627451, 0.78431374)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+bg_color = Color(0.1882353, 0.09803922, 0.1254902, 0.9019608)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+bg_color = Color(0.13333334, 0.06666667, 0.08627451, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.23921569, 0.1254902, 0.16470589, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="SettingsOverlay" type="CanvasLayer" unique_id=1125648634]
+layer = 100
+script = ExtResource("1_2syq2")
+
+[node name="Blur" type="ColorRect" parent="." unique_id=735613014]
+material = SubResource("ShaderMaterial_u8x5r")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1519107724]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -265.0
+offset_top = -150.0
+offset_right = 265.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Content" type="VBoxContainer" parent="Panel" unique_id=1426150715]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 22.0
+offset_right = -26.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Panel/Content" unique_id=1990358278]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("3_6n9ht")
+theme_override_font_sizes/font_size = 50
+text = "Настройки"
+horizontal_alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="Panel/Content" unique_id=878562680]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MusicLabel" type="Label" parent="Panel/Content/MusicRow" unique_id=1160985786]
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("3_6n9ht")
+theme_override_font_sizes/font_size = 34
+text = "Музыка"
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="Panel/Content/MusicRow" unique_id=1528505333]
+modulate = Color(1, 0.88235295, 0.6745098, 1)
+custom_minimum_size = Vector2(220, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 75.0
+
+[node name="MusicValue" type="Label" parent="Panel/Content/MusicRow" unique_id=791572623]
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("3_6n9ht")
+theme_override_font_sizes/font_size = 30
+text = "75%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Panel/Content" unique_id=2067773622]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="ButtonsRow" type="HBoxContainer" parent="Panel/Content" unique_id=349657938]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SaveButton" type="Button" parent="Panel/Content/ButtonsRow" unique_id=163078959]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_hover_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("3_6n9ht")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "Сохранить"
+
+[node name="CloseButton" type="Button" parent="Panel/Content/ButtonsRow" unique_id=695562244]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_hover_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("3_6n9ht")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "Назад"

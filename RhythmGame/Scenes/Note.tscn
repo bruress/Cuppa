@@ -55,7 +55,7 @@ shape = SubResource("RectangleShape2D_0fdu7")
 
 [node name="NoteSprite" type="Sprite2D" parent="." unique_id=1425468098]
 position = Vector2(0, 11.000002)
-scale = Vector2(1, 0.84057975)
+scale = Vector2(0.95, 0.7985508)
 texture = ExtResource("2_picia")
 
 [node name="HitEffectSprite" type="Sprite2D" parent="." unique_id=1632852768]

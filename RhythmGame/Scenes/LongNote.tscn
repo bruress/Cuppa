@@ -13,7 +13,7 @@ script = ExtResource("1_8q8q6")
 
 [node name="TailSprite" type="Sprite2D" parent="." unique_id=801114661]
 position = Vector2(49.5, 25)
-scale = Vector2(1.1166667, 1)
+scale = Vector2(1.0608333, 0.95)
 texture = ExtResource("2_jngid")
 
 [node name="Body" type="NinePatchRect" parent="." unique_id=1556713014]
@@ -25,7 +25,7 @@ texture = ExtResource("1_g2etu")
 
 [node name="HeadSprite" type="Sprite2D" parent="." unique_id=1669203921]
 position = Vector2(49.5, 114)
-scale = Vector2(1.1166667, 1)
+scale = Vector2(1.0608333, 0.95)
 texture = ExtResource("3_8q8q6")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=570584308]

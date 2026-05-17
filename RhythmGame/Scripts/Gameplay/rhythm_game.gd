@@ -19,7 +19,7 @@ var note_scene = preload("res://RhythmGame/Scenes/Note.tscn")
 var hold_scene = preload("res://RhythmGame/Scenes/LongNote.tscn")
 
 const MAX_NOTE_SCORE: int = 10		# Base score per note
-const BEATS_TO_TARGET: int = 5		# Travel time in beats (control note speed)
+const BEATS_TO_TARGET: int = 6		# Travel time in beats (control note speed)
 const PROGRESS_SMOOTH_SPEED: float = 3.2
 const COMBO_UI_FADE_SPEED: float = 6.0
 
@@ -33,7 +33,7 @@ var game_time: float = 0.0			# Global timer for sync
 var is_playing: bool = false		# Pause/stop
 
 var all_notes_data: Array = []
-var song_key: String = "bloodroot"
+var song_key: String = "crimson_pulse"
 var progress_value: float = 100.0
 var light_left_base_alpha: float = 0.0
 var light_right_base_alpha: float = 0.0
