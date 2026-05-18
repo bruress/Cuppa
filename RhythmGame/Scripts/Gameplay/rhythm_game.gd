@@ -4,6 +4,7 @@ const SM_PARSER = preload("res://RhythmGame/Scripts/Parsing/sm_parser.gd")
 const SIDE_LIGHTS_CONTROLLER = preload("res://RhythmGame/Scripts/UI/side_lights_controller.gd")
 const SONGS_LIBRARY_DATA = preload("res://RhythmGame/Scripts/State/songs_library.gd")
 const POP_UI = preload("res://RhythmGame/Scripts/UI/pop_effect.gd")
+const CONTROLS_HINT_SCENE = preload("res://Novel/Scenes/ControlsHint.tscn")
 
 @export var songs_library = SONGS_LIBRARY_DATA.SONGS_LIBRARY
 
@@ -22,6 +23,7 @@ const MAX_NOTE_SCORE: int = 10		# Base score per note
 const BEATS_TO_TARGET: int = 6		# Travel time in beats (control note speed)
 const PROGRESS_SMOOTH_SPEED: float = 3.2
 const COMBO_UI_FADE_SPEED: float = 6.0
+const SCENE_FADE_TIME := 0.33
 
 var bpm: float = 0.0
 var beat: float = 0.0
@@ -40,11 +42,21 @@ var light_right_base_alpha: float = 0.0
 var last_combo_score: int = 0
 var combo_ui_alpha: float = 0.0
 
+var round_finished: bool = false
+var intro_waiting: bool = false
+var pending_song_data: Dictionary = {}
+var controls_hint_overlay: CanvasLayer = null
+
 var side_lights_controller = SIDE_LIGHTS_CONTROLLER.new()
 var pop_controller = POP_UI.new()
+var fade_layer: CanvasLayer
+var fade_rect: ColorRect
 
 ## Initialize game
 func _ready() -> void:
+	setup_scene_fade()
+	reset_round_state()
+	song_key = get_song_key_for_client()
 	var data: Dictionary = songs_library[song_key]
 	bpm = data["bpm"]
 	
@@ -60,7 +72,13 @@ func _ready() -> void:
 	$ProgressBar.value = 100.0
 	light_left_base_alpha = light_left.modulate.a
 	light_right_base_alpha = light_right.modulate.a
-	start_game(data)
+	round_finished = false
+
+	if Global.rhythm_controls_seen:
+		start_game(data)
+	else:
+		pending_song_data = data
+		show_controls_hint_once()
 
 ## Start game
 ## [song_data] - dictionary with all data of songs to take song name
@@ -99,6 +117,11 @@ func spawn_hold_note(lag: float, line_index: int, duration: float) -> void:
 	
 ## Main game update
 func _process(delta: float) -> void:
+	if intro_waiting:
+		update_back(delta)
+		update_lights(delta)
+		return
+
 	update_progress_bar(delta)
 	update_ui(delta)
 
@@ -111,6 +134,7 @@ func _process(delta: float) -> void:
 	var current_sync_time: float = get_current_sync_time()
 	spawn_due_notes(current_sync_time)
 	try_start_audio()
+	try_finish_round()
 
 ## Updates score and combo labels
 func update_ui(delta: float) -> void:
@@ -187,6 +211,55 @@ func stop_game() -> void:
 	is_playing = false
 	audio.stop()
 
+## Reset score for new round
+func reset_round_state() -> void:
+	Global.score = 0
+	Global.combo_score = 0
+	Global.combo = ""
+	Global.judged_count = 0
+	Global.last_accuracy = 0.0
+
+
+## Get song key by current client
+func get_song_key_for_client() -> String:
+	if (Global.current_client == "mary" or Global.current_client == "mart"):
+		return "crimson_pulse"
+	if (Global.current_client == "boy"):
+		return "bloodroot"
+	if (Global.current_client == "hunter"):
+		return "moonfall"
+	return song_key
+
+
+## Finish round when song and notes are done
+func try_finish_round() -> void:
+	if round_finished:
+		return
+	if not audio_started:
+		return
+	if audio.playing:
+		return
+	if not all_notes_data.is_empty():
+		return
+	if not get_tree().get_nodes_in_group("notes").is_empty():
+		return
+
+	round_finished = true
+	Global.last_accuracy = get_current_accuracy()
+	if (Global.last_accuracy < 50.0):
+		Global.bad_results_count += 1
+	Global.novel_state = get_result_state_for_client()
+	switch_scene_with_fade("res://Novel/Scenes/MainNovel.tscn")
+
+
+## Get next novel result phase
+func get_result_state_for_client() -> String:
+	if (Global.current_client == "boy"):
+		return "cory_result"
+	if (Global.current_client == "hunter"):
+		return "rose_result"
+	return "mary_result"
+
 ## Manage progress bar 
 func update_progress_bar(delta: float) -> void:
 	if (Global.judged_count <= 0):
@@ -197,3 +270,49 @@ func update_progress_bar(delta: float) -> void:
 	var target_value: float = clamp(accuracy, 0.0, 100.0)
 	progress_value = lerp(progress_value, target_value, min(delta * 6.0, 1.0))
 	$ProgressBar.value = progress_value
+
+
+## Get accuracy by judged notes
+func get_current_accuracy() -> float:
+	if (Global.judged_count <= 0):
+		return 0.0
+	var max_score_so_far: float = float(Global.judged_count * MAX_NOTE_SCORE)
+	return clamp((float(Global.score) / max_score_so_far) * 100.0, 0.0, 100.0)
+
+
+## Build fade overlay
+func setup_scene_fade() -> void:
+	fade_layer = CanvasLayer.new()
+	fade_layer.layer = 200
+	add_child(fade_layer)
+
+	fade_rect = ColorRect.new()
+	fade_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	fade_rect.color = Color(0, 0, 0, 0)
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_layer.add_child(fade_rect)
+
+
+## Fade and open scene
+## [scene_path] - Target scene path
+func switch_scene_with_fade(scene_path: String) -> void:
+	var t: Tween = create_tween()
+	t.tween_property(fade_rect, "color:a", 1.0, SCENE_FADE_TIME).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t.finished.connect(func() -> void:
+		get_tree().change_scene_to_file(scene_path)
+	)
+
+
+## Show controls hint on first launch
+func show_controls_hint_once() -> void:
+	intro_waiting = true
+	controls_hint_overlay = CONTROLS_HINT_SCENE.instantiate()
+	add_child(controls_hint_overlay)
+	controls_hint_overlay.confirmed.connect(on_controls_hint_confirmed)
+
+
+## Start rhythm after confirm
+func on_controls_hint_confirmed() -> void:
+	Global.rhythm_controls_seen = true
+	intro_waiting = false
+	start_game(pending_song_data)

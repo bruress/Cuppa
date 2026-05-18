@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://bqsy8y6fqytcy"]
+
+[ext_resource type="Script" uid="uid://b7m8d6artc6b7" path="res://Novel/Scripts/Flow/ending.gd" id="1_ending"]
+[ext_resource type="Texture2D" uid="uid://b6r1qwgsoyust" path="res://Novel/Assets/Backstory/Background.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://macnsqmg4rlv" path="res://Novel/Assets/Backstory/Gift.png" id="3_gift"]
+[ext_resource type="FontFile" uid="uid://dvpv3y0w1w0t0" path="res://Assets/Fonts/Nunito-VariableFont_wght.ttf" id="4_font_role"]
+[ext_resource type="FontFile" uid="uid://dvpv3y0w1w0t0" path="res://Assets/Fonts/Nunito-VariableFont_wght.ttf" id="5_font_text"]
+[ext_resource type="FontFile" uid="uid://dywnaw85dvwck" path="res://Assets/Fonts/MarckScript-Regular.ttf" id="6_font_btn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_continue_normal"]
+bg_color = Color(0.14509805, 0.05490196, 0.07450981, 0.72)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.88235295, 0.6745098, 0.86)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_continue_hover"]
+bg_color = Color(0.21960784, 0.078431375, 0.11372549, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.94509804, 0.8156863, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Ending" type="Node2D" unique_id=1658783237]
+script = ExtResource("1_ending")
+
+[node name="GoodEnding" type="Node2D" parent="." unique_id=1334188645]
+
+[node name="Background" type="Sprite2D" parent="GoodEnding" unique_id=1184593344]
+position = Vector2(11, 0)
+scale = Vector2(1.031, 1.0069)
+texture = ExtResource("2_bg")
+
+[node name="Gift" type="Sprite2D" parent="GoodEnding" unique_id=543027867]
+position = Vector2(0, -128)
+texture = ExtResource("3_gift")
+
+[node name="BadEnding" type="ColorRect" parent="." unique_id=447845312]
+visible = false
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0, 0, 0, 1)
+
+[node name="Role" type="Label" parent="." unique_id=2113500489]
+offset_left = -520.0
+offset_top = 263.0
+offset_right = 520.0
+offset_bottom = 305.0
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("4_font_role")
+theme_override_font_sizes/font_size = 30
+text = "Рассказчик"
+horizontal_alignment = 1
+
+[node name="DialogText" type="Label" parent="." unique_id=385878611]
+offset_left = -520.0
+offset_top = 310.0
+offset_right = 520.0
+offset_bottom = 470.0
+theme_override_colors/font_color = Color(0.986574, 0.95871645, 0.9460613, 1)
+theme_override_fonts/font = ExtResource("5_font_text")
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ContinueButton" type="Button" parent="." unique_id=157023905]
+offset_left = 640.0
+offset_top = -488.0
+offset_right = 900.0
+offset_bottom = -424.0
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_hover_color = Color(1, 0.94509804, 0.8156863, 1)
+theme_override_fonts/font = ExtResource("6_font_btn")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_continue_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_continue_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_continue_hover")
+text = "Дальше"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2025207035]

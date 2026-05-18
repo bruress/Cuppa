@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://d2dw6jrqk3vfm"
-path="res://.godot/imported/GreatVibes-Regular.ttf-d6c60ce7bed0cc91d2c1c0c503505c43.fontdata"
+uid="uid://dvpv3y0w1w0t0"
+path="res://.godot/imported/Nunito-VariableFont_wght.ttf-fb77f472eac12e61ee14bc28a966a074.fontdata"
 
 [deps]
 
-source_file="res://Assets/Fonts/GreatVibes-Regular.ttf"
-dest_files=["res://.godot/imported/GreatVibes-Regular.ttf-d6c60ce7bed0cc91d2c1c0c503505c43.fontdata"]
+source_file="res://Assets/Fonts/Nunito-VariableFont_wght.ttf"
+dest_files=["res://.godot/imported/Nunito-VariableFont_wght.ttf-fb77f472eac12e61ee14bc28a966a074.fontdata"]
 
 [params]
 

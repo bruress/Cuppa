@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://c6sjn5sg85e1x"]
+
+[ext_resource type="Script" uid="uid://o8n8gxmked1h" path="res://Novel/Scripts/UI/controls_hint.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://dywnaw85dvwck" path="res://Assets/Fonts/MarckScript-Regular.ttf" id="2_font"]
+
+[sub_resource type="Shader" id="Shader_blur"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_tex : hint_screen_texture, repeat_disable, filter_linear_mipmap;
+uniform float blur_strength : hint_range(0.0, 4.0) = 2.4;
+
+void fragment() {
+	vec2 uv = SCREEN_UV;
+	vec2 px = SCREEN_PIXEL_SIZE * blur_strength;
+	vec4 c = texture(screen_tex, uv) * 0.28;
+	c += texture(screen_tex, uv + vec2(px.x, 0.0)) * 0.16;
+	c += texture(screen_tex, uv - vec2(px.x, 0.0)) * 0.16;
+	c += texture(screen_tex, uv + vec2(0.0, px.y)) * 0.16;
+	c += texture(screen_tex, uv - vec2(0.0, px.y)) * 0.16;
+	c += texture(screen_tex, uv + px) * 0.04;
+	c += texture(screen_tex, uv - px) * 0.04;
+	COLOR = c;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_blur"]
+shader = SubResource("Shader_blur")
+shader_parameter/blur_strength = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.14117648, 0.06666667, 0.08627451, 0.84)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+bg_color = Color(0.1882353, 0.09803922, 0.1254902, 0.9019608)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.23921569, 0.1254902, 0.16470589, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+bg_color = Color(0.14901961, 0.078431375, 0.09803922, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="ControlsHint" type="CanvasLayer" unique_id=497659519]
+layer = 120
+script = ExtResource("1_script")
+
+[node name="Blur" type="ColorRect" parent="." unique_id=44025722]
+material = SubResource("ShaderMaterial_blur")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=512453421]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Panel" type="Panel" parent="." unique_id=1325819124]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -235.0
+offset_top = -110.0
+offset_right = 235.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Content" type="VBoxContainer" parent="Panel" unique_id=1947478209]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 18.0
+offset_right = -22.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Panel/Content" unique_id=1986868566]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 42
+text = "Управление"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="Panel/Content" unique_id=772989741]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.986574, 0.95871645, 0.9460613, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 28
+text = "Клавиши - S, D, K, L"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="OkButton" type="Button" parent="Panel" unique_id=130870390]
+custom_minimum_size = Vector2(180, 44)
+layout_mode = 0
+offset_left = 145.0
+offset_top = 152.0
+offset_right = 325.0
+offset_bottom = 196.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_hover_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "OK"

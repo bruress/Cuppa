@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://yoaabuakdtng"]
+
+[ext_resource type="Texture2D" uid="uid://b6r1qwgsoyust" path="res://Novel/Assets/Backstory/Background.png" id="1_500at"]
+[ext_resource type="Texture2D" uid="uid://macnsqmg4rlv" path="res://Novel/Assets/Backstory/Gift.png" id="2_aatcv"]
+[ext_resource type="Script" uid="uid://biyae7yjbe8c" path="res://Novel/Scripts/Flow/prologue.gd" id="4_kv7hn"]
+[ext_resource type="AudioStream" uid="uid://d31su208rxaog" path="res://Novel/Data/Songs/Prologue.mp3" id="5_e2qpm"]
+[ext_resource type="FontFile" uid="uid://dywnaw85dvwck" path="res://Assets/Fonts/MarckScript-Regular.ttf" id="5_r55tb"]
+[ext_resource type="FontFile" uid="uid://dvpv3y0w1w0t0" path="res://Assets/Fonts/Nunito-VariableFont_wght.ttf" id="5_uojny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skip_normal"]
+bg_color = Color(0.14509805, 0.05490196, 0.07450981, 0.72)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skip_pressed"]
+bg_color = Color(0.101960786, 0.03529412, 0.05490196, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.88235295, 0.6745098, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skip_hover"]
+bg_color = Color(0.21960784, 0.078431375, 0.11372549, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.94509804, 0.8156863, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(1, 0.75, 0.45, 0.25)
+shadow_size = 5
+
+[node name="Prologue" type="Node2D" unique_id=1134699474]
+script = ExtResource("4_kv7hn")
+
+[node name="MainCamera" type="Camera2D" parent="." unique_id=1793211722]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1568575128]
+position = Vector2(10.730856, 0.24996185)
+scale = Vector2(1.0314904, 1.0069444)
+texture = ExtResource("1_500at")
+
+[node name="Image" type="Sprite2D" parent="." unique_id=1832313821]
+position = Vector2(0, -128)
+texture = ExtResource("2_aatcv")
+
+[node name="Role" type="Label" parent="." unique_id=817471195]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = 263.0
+offset_right = 520.0
+offset_bottom = 305.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_fonts/font = ExtResource("5_r55tb")
+theme_override_font_sizes/font_size = 38
+text = "Рассказчик"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialoge" type="Label" parent="." unique_id=2016815732]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = 310.0
+offset_right = 528.0
+offset_bottom = 430.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.986574, 0.95871645, 0.9460613, 1)
+theme_override_fonts/font = ExtResource("5_uojny")
+theme_override_font_sizes/font_size = 30
+text = "Ночью кофейня становится тише."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SkipButton" type="Button" parent="." unique_id=869646367]
+offset_left = 640.0
+offset_top = -488.0
+offset_right = 900.0
+offset_bottom = -424.0
+theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.88235295, 0.6745098, 1)
+theme_override_colors/font_hover_color = Color(1, 0.94509804, 0.8156863, 1)
+theme_override_fonts/font = ExtResource("5_r55tb")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_skip_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_skip_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_skip_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_skip_hover")
+text = "Пропустить"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2063662124]
+stream = ExtResource("5_e2qpm")
+volume_db = -13.0
+autoplay = true
+parameters/looping = true

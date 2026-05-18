@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bphbcosuhndhq"
-path="res://.godot/imported/MaryCalm.png-67eef5f0e61b3e33e2cc21e206579eb8.ctex"
+uid="uid://d0thf38yxj4s8"
+path="res://.godot/imported/RoseAnim.png-b46e75cdfac4b364e141ea3ceb4f0d49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Mary/MaryCalm.png"
-dest_files=["res://.godot/imported/MaryCalm.png-67eef5f0e61b3e33e2cc21e206579eb8.ctex"]
+source_file="res://Novel/Assets/Sprites/Rose/RoseAnim.png"
+dest_files=["res://.godot/imported/RoseAnim.png-b46e75cdfac4b364e141ea3ceb4f0d49.ctex"]
 
 [params]
 

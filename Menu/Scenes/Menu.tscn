@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dyikpm48ptce0"]
 
+[ext_resource type="Script" uid="uid://cm1mbesgw5n3p" path="res://Menu/Scripts/Menu/menu.gd" id="1_1lm7l"]
 [ext_resource type="Texture2D" uid="uid://c3s2rgnj4pcwx" path="res://Menu/Assets/Background/BackgroundMenu.png" id="2_1lm7l"]
 [ext_resource type="FontFile" uid="uid://w6646dghk3wy" path="res://Assets/Fonts/GiveYouGlory-Regular.ttf" id="2_332dp"]
+[ext_resource type="Script" uid="uid://ekaes8exeh26" path="res://RhythmGame/Scripts/UI/floating_shapes_layer.gd" id="3_y21l4"]
+[ext_resource type="Texture2D" uid="uid://bdo7567mau63x" path="res://RhythmGame/Assets/VFX/Effects/Sparkle.png" id="4_p4p8b"]
 [ext_resource type="Texture2D" uid="uid://0egkjcm7myqs" path="res://RhythmGame/Assets/Sprites/Background/Black.png" id="5_p4p8b"]
-[ext_resource type="Texture2D" uid="uid://drknynm8y8lph" path="res://RhythmGame/Assets/Sprites/Ligths/light.png" id="6_wdime"]
-[ext_resource type="Script" uid="uid://ceb1kql4qgeo2" path="res://Menu/Scripts/menu.gd" id="7_menu"]
-[ext_resource type="Texture2D" uid="uid://dqjdf682kmq6w" path="res://Menu/Assets/Background/Background.png" id="8_ttipc"]
 [ext_resource type="FontFile" uid="uid://dywnaw85dvwck" path="res://Assets/Fonts/MarckScript-Regular.ttf" id="9_oxlmi"]
 [ext_resource type="AudioStream" uid="uid://cs5me01c2si7g" path="res://Menu/Data/Songs/MenuTheme.mp3" id="10_oqrcm"]
 
@@ -466,123 +466,72 @@ animations = [{
 }]
 
 [node name="Menu" type="Node2D" unique_id=133869355]
-script = ExtResource("7_menu")
+script = ExtResource("1_1lm7l")
 
 [node name="Background" type="AnimatedSprite2D" parent="." unique_id=383624650]
-position = Vector2(6.7762184, 4.9999924)
-scale = Vector2(2.136719, 2.136719)
+position = Vector2(-1.2240205, -4.3928623e-05)
+scale = Vector2(2.1367183, 2.1367188)
 sprite_frames = SubResource("SpriteFrames_wdime")
 autoplay = "default"
 frame_progress = 0.81920034
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1441628260]
-visible = false
-position = Vector2(2.6946611, 7.5000114)
-scale = Vector2(1.6482036, 1.6482036)
-texture = ExtResource("8_ttipc")
-
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1672459886]
 
 [node name="FloatingShapesLayer" type="Node2D" parent="." unique_id=156873250]
+script = ExtResource("3_y21l4")
+shape_texture = ExtResource("4_p4p8b")
+shapes_count = 20
+max_scale = 0.85
 
-[node name="Light1" type="Sprite2D" parent="." unique_id=2014270512]
+[node name="Blackout" type="Sprite2D" parent="." unique_id=2014270512]
 modulate = Color(1, 1, 1, 0.19607843)
 texture = ExtResource("5_p4p8b")
 
-[node name="Light2" type="Sprite2D" parent="." unique_id=953980338]
-modulate = Color(1, 1, 1, 0.37254903)
-position = Vector2(18.500002, -277)
-scale = Vector2(0.346, 0.3639999)
-texture = ExtResource("6_wdime")
-
-[node name="Light3" type="Sprite2D" parent="." unique_id=1910445116]
-modulate = Color(1, 1, 1, 0.37254903)
-position = Vector2(-422, -267.67526)
-scale = Vector2(0.30800006, 0.27470103)
-texture = ExtResource("6_wdime")
-
-[node name="Light4" type="Sprite2D" parent="." unique_id=1008448164]
-modulate = Color(1, 1, 1, 0.37254903)
-position = Vector2(-604.99994, -236)
-scale = Vector2(0.24799997, 0.24940205)
-texture = ExtResource("6_wdime")
-
-[node name="Light6" type="Sprite2D" parent="." unique_id=1070260190]
-modulate = Color(1, 1, 1, 0.37254903)
-position = Vector2(-841, -403.00003)
-scale = Vector2(0.37000006, 0.3578599)
-texture = ExtResource("6_wdime")
-
-[node name="Light7" type="Sprite2D" parent="." unique_id=1197766776]
-modulate = Color(1, 1, 1, 0.37254903)
-position = Vector2(431.35056, -268.35056)
-scale = Vector2(0.30940208, 0.28540206)
-texture = ExtResource("6_wdime")
-
-[node name="Light8" type="Sprite2D" parent="." unique_id=1952816098]
-modulate = Color(1, 1, 1, 0.37254903)
-position = Vector2(609.1153, -243.61528)
-scale = Vector2(0.24046107, 0.21046112)
-texture = ExtResource("6_wdime")
-
-[node name="Light9" type="Sprite2D" parent="." unique_id=1966812269]
-modulate = Color(1, 1, 1, 0.37254903)
-position = Vector2(838.99994, -410.1744)
-scale = Vector2(0.39739537, 0.37269768)
-texture = ExtResource("6_wdime")
-
 [node name="GameName" type="Label" parent="." unique_id=2084859219]
 offset_left = -88.000015
-offset_top = -176.0
+offset_top = -160.0
 offset_right = 121.0
-offset_bottom = -43.0
+offset_bottom = -27.0
 theme_override_colors/font_color = Color(0.2798727, 0.1722728, 0.1674636, 1)
 theme_override_fonts/font = ExtResource("2_332dp")
 theme_override_font_sizes/font_size = 82
 text = "Cuppa"
 
 [node name="GameStart" type="Label" parent="." unique_id=1179527154]
-offset_left = -103.999985
-offset_top = -69.0
-offset_right = 161.00002
-offset_bottom = -8.0
+offset_left = -102.999985
+offset_top = -45.0
+offset_right = 162.00002
+offset_bottom = 16.0
+mouse_filter = 0
 theme_override_colors/font_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
 theme_override_fonts/font = ExtResource("9_oxlmi")
 theme_override_font_sizes/font_size = 42
 text = "Начать игру"
 
-[node name="GameContinue" type="Label" parent="." unique_id=1321056471]
-offset_left = -95.999985
-offset_top = -16.0
-offset_right = 169.00002
-offset_bottom = 45.0
-theme_override_colors/font_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
-theme_override_fonts/font = ExtResource("9_oxlmi")
-theme_override_font_sizes/font_size = 42
-text = "Продолжить"
-
 [node name="GameSettings" type="Label" parent="." unique_id=676145005]
-offset_left = -89.0
-offset_top = 38.0
-offset_right = 111.0
-offset_bottom = 99.0
+offset_left = -85.0
+offset_top = 6.0
+offset_right = 115.0
+offset_bottom = 67.0
+mouse_filter = 0
 theme_override_colors/font_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
 theme_override_fonts/font = ExtResource("9_oxlmi")
 theme_override_font_sizes/font_size = 42
 text = "Настройки"
 
 [node name="GameExit" type="Label" parent="." unique_id=697412233]
-offset_left = -55.0
-offset_top = 89.0
-offset_right = 70.0
-offset_bottom = 150.0
+offset_left = -49.0
+offset_top = 57.0
+offset_right = 76.0
+offset_bottom = 118.0
+mouse_filter = 0
 theme_override_colors/font_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
 theme_override_fonts/font = ExtResource("9_oxlmi")
 theme_override_font_sizes/font_size = 42
 text = "Выйти"
 
 [node name="Line" type="Line2D" parent="." unique_id=831930109]
-position = Vector2(3.2992706, -85.036476)
+position = Vector2(0.29927003, -69.03648)
 scale = Vector2(1.9635036, 1.9635036)
 points = PackedVector2Array(-81.13012, 0, 98.14127, 0)
 width = 1.0

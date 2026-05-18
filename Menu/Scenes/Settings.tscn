@@ -78,6 +78,7 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
 [node name="SettingsOverlay" type="CanvasLayer" unique_id=1125648634]
+process_mode = 3
 layer = 100
 script = ExtResource("1_7ci0n")
 
@@ -142,7 +143,9 @@ modulate = Color(1, 0.88235295, 0.6745098, 1)
 custom_minimum_size = Vector2(220, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-value = 75.0
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="MusicValue" type="Label" parent="Panel/Content/MusicRow" unique_id=791572623]
 custom_minimum_size = Vector2(64, 36)
