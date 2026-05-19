@@ -1,0 +1,13 @@
+\babel@toc {russian}{}\relax 
+\contentsline {section}{\numberline {1}Анализ предметной области}{6}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Обзор предметной области}{6}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Анализ аналогов}{7}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Анализ игры <<VA-11 Hall-A>>}{7}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Анализ игры <<Coffee Talk>>}{8}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Анализ игры <<Yunyun Syndrome!? Rhythm Psychosis>>}{9}{subsubsection.1.2.3}%
+\contentsline {subsubsection}{\numberline {1.2.4}Анализ игры <<Glisynth>>}{10}{subsubsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.3}Требования к разработке}{11}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Функциональные требования}{12}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Нефункциональные требования}{12}{subsubsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.4}Постановка задач}{13}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Заключение}{14}{subsection.1.5}%

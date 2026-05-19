@@ -1,0 +1,204 @@
+% Copyright 2006 Konstantin Korikov <lostclus@ua.fm>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2003/12/01 or later.
+%
+% This work has the LPPL maintenance status "maintained".
+% 
+% This Current Maintainer of this work is Konstantin Korikov.
+%
+% This work consists of all files listed in manifest.txt.
+%
+
+%
+% This is automaticaly generated file, do not edit it.
+%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{eskdtitle}[2010/01/14 v0.98 Title GOST 2.105]
+
+\RequirePackage{eskdstamp}
+\RequirePackage{eskdlang}
+\RequirePackage{eskdinfo}
+\RequirePackage{eskdtitlebase}
+
+\newcommand{\ESKD@title@split@field}[2]{%
+  \parbox[t]{.4\hsize}{\raggedright#1}\hfill
+  \parbox[t]{.4\hsize}{\raggedright#2}}
+
+\renewcommand{\ESKDtheTitleFieldI}{%
+  \ESKDtheDepartment\par\ESKDtheCompany}
+
+\def\ESKDtheTitleFieldIIl{}
+\renewcommand{\ESKDtheTitleFieldIIl}{%
+  \ESKDtheClassCode}
+\def\ESKDtheTitleFieldIIr{}
+\renewcommand{\ESKDtheTitleFieldIIr}{}
+\renewcommand{\ESKDtheTitleFieldII}{%
+  \ESKD@title@split@field{\ESKDtheTitleFieldIIl}{\ESKDtheTitleFieldIIr}}
+
+\def\ESKDtheTitleFieldIIIl{}
+\renewcommand{\ESKDtheTitleFieldIIIl}{%
+  \ifx\ESKD@title@approving@sheet\@undefined
+    \expandafter\ifx\csname ESKD@title@agreed@name@1\endcsname\relax\else
+      \textbf{\MakeUppercase{\ESKDagreedName}}\\
+      \ESKD@title@make@stamp{agreed}{1}
+    \fi
+  \else
+    \textbf{\MakeUppercase{\ESKDapprovedName}}\\
+    \ESKD@title@approving@sheet
+  \fi}
+\def\ESKDtheTitleFieldIIIr{}
+\renewcommand{\ESKDtheTitleFieldIIIr}{%
+  \ifx\ESKD@title@approving@sheet\@undefined
+    \expandafter\ifx\csname ESKD@title@approved@name@1\endcsname\relax\else
+      \textbf{\MakeUppercase{\ESKDapprovingName}}\\
+      \ESKD@title@make@stamp{approved}{1}
+    \fi
+  \fi}
+\renewcommand{\ESKDtheTitleFieldIII}{%
+  \ESKD@title@split@field{\ESKDtheTitleFieldIIIl}{\ESKDtheTitleFieldIIIr}}
+
+\renewcommand{\ESKDtheTitleFieldIV}{%
+  \MakeUppercase{\ESKDtheTitle}\par\ESKDtheDocName}
+
+\renewcommand{\ESKDtheTitleFieldV}{}
+
+\renewcommand{\ESKDtheTitleFieldVI}{%
+  \MakeUppercase{\ESKDtheSignature}}
+
+\renewcommand{\ESKDtheTitleFieldVII}{}
+
+\def\ESKDtheTitleFieldVIIIl{}
+\renewcommand{\ESKDtheTitleFieldVIIIl}{%
+  \ifx\ESKD@title@approving@sheet\@undefined
+    \ESKD@tmpcnta = 1
+    \loop
+    \ifnum \ESKD@tmpcnta < \ESKD@title@agreed@cnt
+      \advance \ESKD@tmpcnta 1
+      \ESKD@title@make@stamp{agreed}{\number\ESKD@tmpcnta}
+      \par\vspace{5mm}
+    \repeat
+  \fi}
+\def\ESKDtheTitleFieldVIIIr{}
+\renewcommand{\ESKDtheTitleFieldVIIIr}{%
+  \ifx\ESKD@title@approving@sheet\@undefined
+    \ESKD@tmpcnta = 0
+    \loop
+    \ifnum \ESKD@tmpcnta < \ESKD@title@designed@cnt
+      \advance \ESKD@tmpcnta 1
+      \ESKD@title@make@stamp{designed}{\number\ESKD@tmpcnta}
+      \par\vspace{5mm}
+    \repeat
+  \fi}
+\renewcommand{\ESKDtheTitleFieldVIII}{%
+  \ESKD@title@split@field{\ESKDtheTitleFieldVIIIl}{\ESKDtheTitleFieldVIIIr}}
+
+\renewcommand{\ESKDtheTitleFieldX}{\ESKDtheYear}
+
+\renewcommand{\ESKDtitleFontI}{\ESKDfontV}
+\renewcommand{\ESKDtitleFontII}{\ESKDfontIII}
+\renewcommand{\ESKDtitleFontIII}{%
+  \ESKDfontIII\renewcommand{\baselinestretch}{1.50}\selectfont}
+\renewcommand{\ESKDtitleFontIV}{\ESKDfontV}
+\renewcommand{\ESKDtitleFontV}{\ESKDfontV}
+\renewcommand{\ESKDtitleFontVI}{\ESKDfontV}
+\renewcommand{\ESKDtitleFontVII}{\ESKDfontIII}
+\renewcommand{\ESKDtitleFontVIII}{%
+  \ESKDfontIII\renewcommand{\baselinestretch}{1.25}\selectfont}
+\renewcommand{\ESKDtitleFontX}{\ESKDfontV}
+
+\renewcommand{\maketitle}{%
+  \begin{ESKDtitlePage}
+  \setlength{\topsep}{0mm}
+  \noindent
+  \parbox[c][.28\vsize][t]{\hsize}{%
+    \begin{center}
+МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ ФЕДЕРАЦИИ
+
+Федеральное государственное бюджетное образовательное учреждение высшего образования
+
+\textbf{«Вятский государственный университет»}\\\textbf{(ФГБОУ ВО <<ВятГУ>>)}
+
+Факультет автоматики и вычислительной техники
+
+Кафедра электронных вычислительных машин
+\end{center}
+\begin{flushright}
+  Допущено к защите\\
+  Руководитель проекта\\
+  %Преподаватель\\
+  \underline{\hspace{15mm}}/Сергеева Е.Г./\\
+  <<\underline{\hspace{5mm}}>>\underline{\hspace{15mm}}2026 г.
+\end{flushright}
+\vspace*{15mm}
+\begin{center}
+Разработка однопользовательской 2D игры <<Cuppa>>  \\
+\vspace*{5mm}
+Пояснительная записка курсового проекта по дисциплине\\ <<Разработка мультимедийных приложений>>\\ ТПЖА.000000.000 ПЗ    
+\end{center}
+\vspace*{20mm}
+
+Разработал студент группы ИВТб-2302 \hspace*{20mm} \underline{\hspace{25mm}} /Матешко В. В./
+
+Руководитель \hspace*{76mm} \underline{\hspace{25mm}} /Сергеева Е.Г./
+
+Консультант \hspace*{78mm} \underline{\hspace{25mm}} /Сергеева Е.Г./
+
+\begin{flushright}
+\vspace*{5mm}
+
+Проект защищен с оценкой <<\underline{\hspace{25mm}}>>\underline{\hspace{25mm}}
+
+
+\hspace*{55mm}\makebox[25mm][c]{(оценка)}\hspace*{4mm}\makebox[25mm][c]{(дата)}
+
+
+\vspace*{5mm}
+
+Члены комиссии\hspace*{5mm} \underline{\hspace{36mm}}\ /\underline{\hspace{36mm}}/
+
+\small{\hspace*{36mm}\makebox[36mm][c]{(подпись)}\hspace*{6mm}\makebox[36mm][c]{(ФИО)}}
+
+\hspace*{36mm}\underline{\hspace{36mm}}\ /\underline{\hspace{36mm}}/
+
+\small{\hspace*{36mm}\makebox[36mm][c]{(подпись)}\hspace*{6mm}\makebox[36mm][c]{(ФИО)}}
+
+\hspace*{36mm}\underline{\hspace{36mm}}\ /\underline{\hspace{36mm}}/
+
+\small{\hspace*{36mm}\makebox[36mm][c]{(подпись)}\hspace*{6mm}\makebox[36mm][c]{(ФИО)}}
+
+\end{flushright}
+
+\vspace*{10mm}
+
+\begin{center}
+Киров 2026
+\end{center}
+}
+
+\newpage
+\begin{center}
+Реферат
+\end{center}  
+
+Матешко В.В. Разработка однопользовательской 2D игры <<Cuppa>>. ТПЖА.000000.000 ПЗ: Курс. проект / ВятГУ, каф. ЭВМ; рук. Сергеева Е.Г. - Киров, 2026. -- ПЗ 0 с., 0 рис., 0 прил.
+
+\vspace{18pt}
+
+2D-ИГРА, РИТМ-ИГРА, РАЗРАБОТКА ИГРЫ, ВИЗУАЛЬНАЯ НОВЕЛЛА, СЮЖЕТНОЕ ВЕТВЛЕНИЕ, СИСТЕМА ОЦЕНКИ, ПАРСИНГ SM-ФАЙЛОВ, ОБРАБОТКА ДЛИННЫХ НОТ, СИНХРОНИЗАЦИЯ АУДИО И ГЕЙМПЛЕЯ, GODOT, GDSCRIPT.\\
+
+\textbf{Объект курсового проекта} -- однопользовательские 2D-игры, музыкальный элемент как ключевая игровая механика, интерактивное повествование, переходы между игровыми состояниями.
+
+\textbf{Предмет курсового проекта} -- однопользовательская 2D-игра <<Cuppa>>, сочетающая визуальную новеллу и ритм-механику приготовления кофе, а также проектирование и реализация соответствующих алгоритмов.
+
+\textbf{Цель курсового проекта} -- разработка и реализация однопользовательской 2D-игры <<Cuppa>> на игровом движке Godot, в которой точность прохождения ритм-сцен влияет на повествование развития истории через диалоги и итоговые концовки.
+
+Результатом выполнения курсового проекта является функциональный прототип игры <<Cuppa>>, включающий главное меню, пролог, диалоговые сцены, ритм-модуль с обработкой обычных и длинных нот, систему оценки попаданий, экран концовки и переходы между всеми ключевыми состояниями.
+
+\end{ESKDtitlePage}}

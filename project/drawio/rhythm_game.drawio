@@ -1,0 +1,141 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.10 Safari/537.36" version="29.6.1">
+  <diagram name="Page-1" id="K72ZdoJDp48X2RmkBEW3">
+    <mxGraphModel dx="836" dy="1584" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-20" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" value="&lt;div&gt;Ритм игра&lt;/div&gt;Начало" vertex="1">
+          <mxGeometry height="60" width="120" x="360" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-21" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-2" parent="1" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp; &amp;nbsp;Получить название песни&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 10px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;из сцены&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 10px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;новеллы&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-22" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Вычислить бит песни, расстояние и скорость ноты" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-23" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-4" parent="1" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" value="Распарсить .sm файл" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-24" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="Да">
+          <mxGeometry relative="1" x="0.2" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="420" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-27" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="350" />
+              <mxPoint x="320" y="480" />
+              <mxPoint x="420" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-28" connectable="0" parent="BPg0NU1onplaSrMh9Hfi-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Нет" vertex="1">
+          <mxGeometry relative="1" x="-0.7826" y="-1" as="geometry">
+            <mxPoint x="11" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-5" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="Это первая&amp;nbsp;&lt;div&gt;сцена?&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-25" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420.02857142857135" y="470" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-31" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-7" parent="1" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" value="Генерация нот" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-32" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-8" parent="1" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" value="Отлов и оценка нажатий" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-29" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Включение аудио" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-30" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-12" parent="1" style="shape=loopLimit;whiteSpace=wrap;html=1;" value="Ноты&lt;div&gt;Пока есть ноты&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-33" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-13" parent="1" style="shape=loopLimit;whiteSpace=wrap;html=1;direction=west;" value="Ноты" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-34" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Выключение аудио" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-35" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Считаем точность попаданий" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="970" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-36" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-38" connectable="0" parent="BPg0NU1onplaSrMh9Hfi-36" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Да" vertex="1">
+          <mxGeometry relative="1" x="0.3067" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-41" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="1080" />
+              <mxPoint x="320" y="1210" />
+              <mxPoint x="420" y="1210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-42" connectable="0" parent="BPg0NU1onplaSrMh9Hfi-41" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Нет" vertex="1">
+          <mxGeometry relative="1" x="0.4473" y="-1" as="geometry">
+            <mxPoint x="-13" y="-131" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-16" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="Точность &amp;lt;50?" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-40" edge="1" parent="1" source="BPg0NU1onplaSrMh9Hfi-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="BPg0NU1onplaSrMh9Hfi-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Увеличиваем счетчик для плохой концовки" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" value="&lt;div&gt;Ритм игра&lt;/div&gt;Конец" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="1220" as="geometry" />
+        </mxCell>
+        <mxCell id="BPg0NU1onplaSrMh9Hfi-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Показать диологовое окно подсказки управления" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="410" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
