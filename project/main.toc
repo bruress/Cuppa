@@ -11,3 +11,15 @@
 \contentsline {subsubsection}{\numberline {1.3.2}Нефункциональные требования}{12}{subsubsection.1.3.2}%
 \contentsline {subsection}{\numberline {1.4}Постановка задач}{13}{subsection.1.4}%
 \contentsline {subsection}{\numberline {1.5}Заключение}{14}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Проектирование}{15}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Структура игрового процесса}{16}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Диаграмма состояний игры}{18}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Проектирование главного меню и настроек}{20}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Проектирование сюжетных сцен новеллы}{20}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Проектирование уровней ритм-игры}{21}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Алгоритм обработки файла нот}{22}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Алгоритм ритм-игры}{24}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Проектирование обычных и длинных нот}{26}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Алгоритм оценки действий игрока}{26}{subsection.2.9}%
+\contentsline {subsection}{\numberline {2.10}Алгоритм выбора концовки}{28}{subsection.2.10}%
+\contentsline {subsection}{\numberline {2.11}Заключение}{30}{subsection.2.11}%
