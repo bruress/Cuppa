@@ -2,6 +2,7 @@ extends Node2D
 
 const RHYTHM_GAME_SCENE_PATH := "res://Novel/Scenes/MainNovel.tscn"
 const SCENE_FADE_TIME := 0.33
+const PROLOGUE_SCENE_PATH := "res://Novel/Scenes/Prologue.tscn"
 
 var current_line: int = 0
 var fade_layer: CanvasLayer
@@ -17,6 +18,8 @@ var lines: Array = PROLOGUE_LINES.LINES
 
 ## Start prologue lines
 func _ready() -> void:
+	Global.can_resume = true
+	Global.resume_scene_path = PROLOGUE_SCENE_PATH
 	setup_scene_fade()
 	show_line()
 	skip_button.pressed.connect(skip_prologue)

@@ -5,6 +5,8 @@ const SIDE_LIGHTS_CONTROLLER = preload("res://RhythmGame/Scripts/UI/side_lights_
 const SONGS_LIBRARY_DATA = preload("res://RhythmGame/Scripts/State/songs_library.gd")
 const POP_UI = preload("res://RhythmGame/Scripts/UI/pop_effect.gd")
 const CONTROLS_HINT_SCENE = preload("res://Novel/Scenes/ControlsHint.tscn")
+const PAUSE_OVERLAY = preload("res://Menu/Scripts/Pause/pause_overlay.gd")
+const RHYTHM_SCENE_PATH := "res://RhythmGame/Scenes/RhythmGame.tscn"
 
 @export var songs_library = SONGS_LIBRARY_DATA.SONGS_LIBRARY
 
@@ -54,6 +56,8 @@ var fade_rect: ColorRect
 
 ## Initialize game
 func _ready() -> void:
+	Global.can_resume = true
+	Global.resume_scene_path = RHYTHM_SCENE_PATH
 	setup_scene_fade()
 	reset_round_state()
 	song_key = get_song_key_for_client()
@@ -79,6 +83,10 @@ func _ready() -> void:
 	else:
 		pending_song_data = data
 		show_controls_hint_once()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		PAUSE_OVERLAY.open_for(self, RHYTHM_SCENE_PATH)
 
 ## Start game
 ## [song_data] - dictionary with all data of songs to take song name

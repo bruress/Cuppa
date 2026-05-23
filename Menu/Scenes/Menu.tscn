@@ -499,20 +499,32 @@ text = "Cuppa"
 
 [node name="GameStart" type="Label" parent="." unique_id=1179527154]
 offset_left = -102.999985
-offset_top = -45.0
+offset_top = 6.0
 offset_right = 162.00002
-offset_bottom = 16.0
+offset_bottom = 67.0
 mouse_filter = 0
 theme_override_colors/font_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
 theme_override_fonts/font = ExtResource("9_oxlmi")
 theme_override_font_sizes/font_size = 42
 text = "Начать игру"
 
+[node name="GameContinue" type="Label" parent="." unique_id=77301955]
+visible = false
+offset_left = -103.0
+offset_top = -45.0
+offset_right = 165.0
+offset_bottom = 16.0
+mouse_filter = 0
+theme_override_colors/font_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
+theme_override_fonts/font = ExtResource("9_oxlmi")
+theme_override_font_sizes/font_size = 42
+text = "Продолжить"
+
 [node name="GameSettings" type="Label" parent="." unique_id=676145005]
 offset_left = -85.0
-offset_top = 6.0
+offset_top = 57.0
 offset_right = 115.0
-offset_bottom = 67.0
+offset_bottom = 118.0
 mouse_filter = 0
 theme_override_colors/font_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
 theme_override_fonts/font = ExtResource("9_oxlmi")
@@ -521,9 +533,9 @@ text = "Настройки"
 
 [node name="GameExit" type="Label" parent="." unique_id=697412233]
 offset_left = -49.0
-offset_top = 57.0
+offset_top = 108.0
 offset_right = 76.0
-offset_bottom = 118.0
+offset_bottom = 169.0
 mouse_filter = 0
 theme_override_colors/font_color = Color(0.2784314, 0.17254902, 0.16862746, 1)
 theme_override_fonts/font = ExtResource("9_oxlmi")

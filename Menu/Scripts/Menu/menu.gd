@@ -1,7 +1,7 @@
 extends Node2D
 
 const SETTINGS_OVERLAY = preload("res://Menu/Scripts/Settings/settings_overlay.gd")
-const RHYTHM_GAME_SCENE_PATH := "res://Novel/Scenes/Prologue.tscn"
+const PROLOGUE_SCENE_PATH := "res://Novel/Scenes/Prologue.tscn"
 
 const MENU_IDLE_COLOR := Color("#472c2b")
 const MENU_HOVER_COLOR := Color("#463438")
@@ -15,12 +15,15 @@ var ui_tweens: Dictionary = {}
 @onready var game_start: Label = $GameStart
 @onready var game_settings: Label = $GameSettings
 @onready var game_exit: Label = $GameExit
+@onready var game_continue: Label = $GameContinue
 
 func _ready() -> void:
 	cache_lights()
 	setup_label(game_start)
 	setup_label(game_settings)
 	setup_label(game_exit)
+	setup_label(game_continue)
+	update_continue_visibility()
 
 ## Collect menu lights
 func cache_lights() -> void:
@@ -52,11 +55,22 @@ func setup_label(label: Label) -> void:
 func on_label_pressed(label: Label) -> void:
 	animate_press(label)
 	if label == game_start:
-		get_tree().change_scene_to_file(RHYTHM_GAME_SCENE_PATH)
+		Global.can_resume = true
+		Global.resume_scene_path = PROLOGUE_SCENE_PATH
+		get_tree().change_scene_to_file(PROLOGUE_SCENE_PATH)
+	elif label == game_continue:
+		if Global.can_resume and not Global.resume_scene_path.is_empty():
+			get_tree().change_scene_to_file(Global.resume_scene_path)
 	elif label == game_settings:
 		SETTINGS_OVERLAY.open_for(self)
 	elif label == game_exit:
 		get_tree().quit()
+
+## Show continue only when runtime progress exists
+func update_continue_visibility() -> void:
+	var can_show: bool = Global.can_resume and not Global.resume_scene_path.is_empty()
+	game_continue.visible = can_show
+	game_continue.mouse_filter = Control.MOUSE_FILTER_STOP if can_show else Control.MOUSE_FILTER_IGNORE
 
 ## Smooth label scale
 func animate_label(label: Label, target_scale: Vector2, duration: float) -> void:

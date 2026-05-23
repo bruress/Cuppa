@@ -18,6 +18,8 @@ var lines: Array = []
 
 ## Prepare ending by result
 func _ready() -> void:
+	Global.can_resume = false
+	Global.resume_scene_path = ""
 	setup_scene_fade()
 	setup_ending()
 	show_line()

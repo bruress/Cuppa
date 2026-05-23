@@ -3,6 +3,8 @@ extends Node2D
 const RHYTHM_GAME_SCENE_PATH := "res://RhythmGame/Scenes/RhythmGame.tscn"
 const ENDING_SCENE_PATH := "res://Novel/Scenes/Ending.tscn"
 const SCENE_FADE_TIME := 0.33
+const NOVEL_SCENE_PATH := "res://Novel/Scenes/MainNovel.tscn"
+const PAUSE_OVERLAY = preload("res://Menu/Scripts/Pause/pause_overlay.gd")
 
 var current_line: int = 0
 var lines: Array = []
@@ -25,6 +27,8 @@ const DIALOGS = preload("res://Novel/Data/Dialog/dialogs.gd")
 
 ## Prepare dialog phase
 func _ready() -> void:
+	Global.can_resume = true
+	Global.resume_scene_path = NOVEL_SCENE_PATH
 	setup_scene_fade()
 	setup_story_phase()
 	show_line()
@@ -32,6 +36,9 @@ func _ready() -> void:
 
 ## Go next by space or click
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		PAUSE_OVERLAY.open_for(self, NOVEL_SCENE_PATH)
+		return
 	if (event is InputEventKey and event.pressed and event.keycode == KEY_SPACE):
 		next_line()
 	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):

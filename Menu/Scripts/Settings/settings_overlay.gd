@@ -16,10 +16,11 @@ var draft_music_volume: float = DEFAULT_MUSIC_VOLUME		# Temp value before save
 
 ## Open settings over current scene
 ## [scene_root] - Any node from active scene
-static func open_for(scene_root: Node) -> void:
+static func open_for(scene_root: Node) -> SettingsOverlay:
 	var current_scene: Node = scene_root.get_tree().current_scene
-	var overlay: Node = SETTINGS_SCENE.instantiate()
+	var overlay: SettingsOverlay = SETTINGS_SCENE.instantiate()
 	current_scene.add_child(overlay)
+	return overlay
 
 ## Prepare settings and bind buttons
 func _ready() -> void:

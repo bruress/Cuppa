@@ -26,3 +26,7 @@ var bad_results_count: int = 0
 
 # Show controls hint only once before first rhythm start
 var rhythm_controls_seen: bool = false
+
+# Runtime-only continue from menu (no file save)
+var can_resume: bool = false
+var resume_scene_path: String = ""
