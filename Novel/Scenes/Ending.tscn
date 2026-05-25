@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b7m8d6artc6b7" path="res://Novel/Scripts/Flow/ending.gd" id="1_ending"]
 [ext_resource type="Texture2D" uid="uid://b6r1qwgsoyust" path="res://Novel/Assets/Backstory/Background.png" id="2_bg"]
 [ext_resource type="Texture2D" uid="uid://macnsqmg4rlv" path="res://Novel/Assets/Backstory/Gift.png" id="3_gift"]
-[ext_resource type="FontFile" uid="uid://dvpv3y0w1w0t0" path="res://Assets/Fonts/Nunito-VariableFont_wght.ttf" id="4_font_role"]
 [ext_resource type="FontFile" uid="uid://dvpv3y0w1w0t0" path="res://Assets/Fonts/Nunito-VariableFont_wght.ttf" id="5_font_text"]
 [ext_resource type="FontFile" uid="uid://dywnaw85dvwck" path="res://Assets/Fonts/MarckScript-Regular.ttf" id="6_font_btn"]
 
@@ -59,7 +58,7 @@ offset_top = 263.0
 offset_right = 520.0
 offset_bottom = 305.0
 theme_override_colors/font_color = Color(1, 0.88235295, 0.6745098, 1)
-theme_override_fonts/font = ExtResource("4_font_role")
+theme_override_fonts/font = ExtResource("5_font_text")
 theme_override_font_sizes/font_size = 30
 text = "Рассказчик"
 horizontal_alignment = 1
