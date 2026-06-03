@@ -13,7 +13,7 @@ config_version=5
 config/name="Cuppa"
 run/main_scene="uid://dyikpm48ptce0"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://ciy1xf0si1s2e"
 
 [autoload]
 
